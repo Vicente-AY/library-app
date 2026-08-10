@@ -1,11 +1,11 @@
 public class film : libraryItem
 {
-    String director {get; set;} = [];
-    String screenWriter {get; set;} = "";
-    int duration {get; set;} = 0; //in minutes
-    String productionCompany {get; set;} = "";
-    String versionLanguages {get; set;} = [];
-    String format {get; set;} = ""; //VHS, DVD
+    public String[] director {get; set;} = Array.Empty<String>();
+    public String screenWriter {get; set;} = "";
+    public int duration {get; set;} = 0; //in minutes
+    public String productionCompany {get; set;} = "";
+    public String[] versionLanguages {get; set;} = Array.Empty<String>();
+    public String format {get; set;} = ""; //VHS, DVD
 
     public film(int id, String title, int year, Availability availability, String genre, String imageRoute, int numberOfCopies, 
                 String[] director, String screenWriter, int duration, String productionCompany, String versionLanguages, String format)
@@ -19,7 +19,7 @@ public class film : libraryItem
         this.format = format;
     }
 
-    public String getData()
+    public override String getData()
     {
         //algo se me ocurrirá
     }

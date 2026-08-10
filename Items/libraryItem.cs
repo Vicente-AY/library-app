@@ -4,13 +4,13 @@ using utils.Availability;
 
 public abstract class libraryItem{
     
-    int id {get; set; } = 0;
-    String title {get; set;} = "";
-    int year {get; set;} = 0;
-    Availability availability {get; set;} = Availability.Available;
-    String genre {get; set;} = "";
-    String imageRoute {get; set;} = "";
-    int numberOfCopies {get; set;} = 0;
+    public int id {get; set; } = 0;
+    public String title {get; set;} = "";
+    public int year {get; set;} = 0;
+    public Availability availability {get; set;} = Availability.Available;
+    public String genre {get; set;} = "";
+    public String imageRoute {get; set;} = "";
+    public int numberOfCopies {get; set;} = 0;
 
     public libraryItem(int id, String title, int year, Availability availability, String genre, String imageRoute, int numberOfCopies)
     {

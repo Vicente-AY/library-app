@@ -1,10 +1,10 @@
 public class videogame : libraryItem
 {
-    String developer {get; set;} = "";
-    String publisher {get; set;} = "";
-    String platform {get; set;} = "";
-    String engine {get; set;} = "";
-    String versionLanguages {get; set;} = [];
+    public String developer {get; set;} = "";
+    public String publisher {get; set;} = "";
+    public String platform {get; set;} = "";
+    public String engine {get; set;} = "";
+    public String[] versionLanguages {get; set;} = Array.Empty<String>();
 
     public videogame(int id, String title, int year, Availability availability, String genre, String imageRoute, int numberOfCopies, 
                     String developer, String publisher, String platform, String engine, String[] versionLanguages)
@@ -17,7 +17,7 @@ public class videogame : libraryItem
         this.versionLanguages = versionLanguages;
     }
 
-    public String getData()
+    public override String getData()
     {
         //esto ya mañana que tengo hambre
     }
