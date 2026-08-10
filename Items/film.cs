@@ -1,4 +1,4 @@
-public class movie : libraryItem
+public class film : libraryItem
 {
     String director {get; set;} = [];
     String screenWriter {get; set;} = "";
@@ -7,7 +7,7 @@ public class movie : libraryItem
     String versionLanguages {get; set;} = [];
     String format {get; set;} = ""; //VHS, DVD
 
-    public movie(int id, String title, int year, Availability availability, String genre, String imageRoute, int numberOfCopies, 
+    public film(int id, String title, int year, Availability availability, String genre, String imageRoute, int numberOfCopies, 
                 String[] director, String screenWriter, int duration, String productionCompany, String versionLanguages, String format)
                 : base(id, title, year, availability, genre, imageRoute, numberOfCopies)
     {
