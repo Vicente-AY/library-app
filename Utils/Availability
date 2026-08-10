@@ -1,0 +1,6 @@
+public enum Availability
+{
+    Available,
+    Lent,
+    Maintenance
+}
