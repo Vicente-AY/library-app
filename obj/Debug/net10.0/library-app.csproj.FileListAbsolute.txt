@@ -1,0 +1,15 @@
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\library-app.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\library-app.AssemblyInfoInputs.cache
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\library-app.AssemblyInfo.cs
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\library-app.csproj.CoreCompileInputs.cache
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\library-app.sourcelink.json
+C:\Users\Vicente\Documents\library-app\bin\Debug\net10.0\library-app.exe
+C:\Users\Vicente\Documents\library-app\bin\Debug\net10.0\library-app.deps.json
+C:\Users\Vicente\Documents\library-app\bin\Debug\net10.0\library-app.runtimeconfig.json
+C:\Users\Vicente\Documents\library-app\bin\Debug\net10.0\library-app.dll
+C:\Users\Vicente\Documents\library-app\bin\Debug\net10.0\library-app.pdb
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\library-app.dll
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\refint\library-app.dll
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\library-app.pdb
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\library-app.genruntimeconfig.cache
+C:\Users\Vicente\Documents\library-app\obj\Debug\net10.0\ref\library-app.dll

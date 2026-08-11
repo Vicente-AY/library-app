@@ -1,4 +1,8 @@
-public class book : libraryItem
+using Utils;
+
+namespace Items;
+
+public class Book : LibraryItem
 {
     public int pages {get; set;} = 0;
     public String[] author {get; set;} = Array.Empty<String>();
@@ -8,9 +12,9 @@ public class book : libraryItem
     public String originalLanguage {get; set;} = "";
     public String versionLanguage {get; set;} = "";
 
-    public book(int id, String title, int year, Availability availability, String genre, String imageRoute, int numberOfCopies, int pages,
+    public Book(int id, String title, int year, String genre, String imageRoute, int numberOfCopies, int pages,
                 String[] author, int edition, String isbn, String editorial, String originalLanguage, String versionLanguage) : base(id, 
-                title, year, availability, genre, imageRoute, numberOfCopies)
+                title, year, genre, imageRoute, numberOfCopies)
     {
         this.pages = pages;
         this.author = author;
@@ -24,6 +28,6 @@ public class book : libraryItem
     
     public override String getData()
     {
-        //ya veré que hago
+        return "Books";
     }
 }

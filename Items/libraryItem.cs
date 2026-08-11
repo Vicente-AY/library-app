@@ -1,8 +1,10 @@
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
-using utils.Availability;
+using Utils;
 
-public abstract class libraryItem{
+namespace Items;
+
+public abstract class LibraryItem{
     
     public int id {get; set; } = 0;
     public String title {get; set;} = "";
@@ -12,12 +14,11 @@ public abstract class libraryItem{
     public String imageRoute {get; set;} = "";
     public int numberOfCopies {get; set;} = 0;
 
-    public libraryItem(int id, String title, int year, Availability availability, String genre, String imageRoute, int numberOfCopies)
+    public LibraryItem(int id, String title, int year, String genre, String imageRoute, int numberOfCopies)
     {
         this.id = id;
         this.title = title;
         this.year = year;
-        this.availability = availability;
         this. genre = genre;
         this.imageRoute = imageRoute;
         this.numberOfCopies = numberOfCopies;
