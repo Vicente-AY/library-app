@@ -43,7 +43,7 @@ public class Videogame : LibraryItem
             "Genre: " + this.genre + ". " + "\n" +
             "Available copies: " + this.numberOfCopies + ". " + "\n" +
             "Developer: " + this.developer + ". " + "\n" +
-            "Publisher " + this.publisher + ". " + "\n" +
+            "Publisher: " + this.publisher + ". " + "\n" +
             "Platform: " + this.platform + ". " + "\n" +
             "Engine: " + this.engine + ". " + "\n" +
             "Available Languages: " + languagesLog + ". " + "\n");                  
