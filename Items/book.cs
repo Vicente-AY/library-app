@@ -33,7 +33,7 @@ public class Book : LibraryItem
 
         for(int i = 0; i < author.Count; i++)
         {
-            authorLog += author[i] + ", ";
+            authorLog += author[i];
 
             if(!(i + 1 == author.Count))
             {
