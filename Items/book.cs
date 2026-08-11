@@ -5,15 +5,15 @@ namespace Items;
 public class Book : LibraryItem
 {
     public int pages {get; set;} = 0;
-    public String[] author {get; set;} = Array.Empty<String>();
+    public List<string> author {get; set;} = new List<string>();
     public int edition {get; set;} = 0;
-    public String isbn {get; set;} = "";
-    public String editorial {get; set;} = "";
-    public String originalLanguage {get; set;} = "";
-    public String versionLanguage {get; set;} = "";
+    public string isbn {get; set;} = "";
+    public string editorial {get; set;} = "";
+    public string originalLanguage {get; set;} = "";
+    public string versionLanguage {get; set;} = "";
 
-    public Book(int id, String title, int year, String genre, String imageRoute, int numberOfCopies, int pages,
-                String[] author, int edition, String isbn, String editorial, String originalLanguage, String versionLanguage) : base(id, 
+    public Book(int id, string title, int year, string genre, string imageRoute, int numberOfCopies, int pages,
+                List<string> author, int edition, string isbn, string editorial, string originalLanguage, string versionLanguage) : base(id, 
                 title, year, genre, imageRoute, numberOfCopies)
     {
         this.pages = pages;
@@ -26,8 +26,33 @@ public class Book : LibraryItem
     }
     
     
-    public override String getData()
+    public override void getData()
     {
-        return "Books";
+
+        String authorLog = "";
+
+        for(int i = 0; i < author.Count; i++)
+        {
+            authorLog += author[i] + ", ";
+
+            if(!(i + 1 == author.Count))
+            {
+                authorLog += ", ";
+            }
+        }
+
+        Console.WriteLine(
+            "Item Id: " + this.id + " \n" +
+            "Title: " + this.title + " \n" +
+            "Release year: " + this.year + "\n" +
+            "Genre: " + this.genre + "\n" +
+            "Available copies: " + this.numberOfCopies + "\n" +
+            "Pages: " + this.pages + "\n" +
+            "Author/s: " + authorLog + "\n" +
+            "Edition: " + this.edition + "\n" +
+            "ISBN:" + this.isbn + "\n" +
+            "Editorial: " + this.editorial + "\n" +
+            "Original Language: " + this.originalLanguage + "\n" +
+            "Version Language: " + this.versionLanguage + "\n");
     }
 }

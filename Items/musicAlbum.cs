@@ -4,14 +4,14 @@ namespace Items;
 
 public class MusicAlbum : LibraryItem
 {
-    String band {get; set;} = "";
-    String[] listOfSongs {get; set;} = Array.Empty<String>();
-    int duration {get; set;} = 0; //in minutes
-    String recordingStudio {get; set;} = "";
-    String label {get; set;} = "";
+    public string band {get; set;} = "";
+    public List<string> listOfSongs {get; set;} = new List<string>();
+    public int duration {get; set;} = 0; //in minutes
+    public string recordingStudio {get; set;} = "";
+    public string label {get; set;} = "";
 
-    public MusicAlbum(int id, String title, int year, String genre, String imageRoute, int numberOfCopies, String band, String[] listOfSongs,
-                    int duration, String recordingStudio, String label) : base(id, title, year, genre, imageRoute, numberOfCopies){
+    public MusicAlbum(int id, string title, int year, string genre, string imageRoute, int numberOfCopies, string band, List<string> listOfSongs,
+                    int duration, string recordingStudio, string label) : base(id, title, year, genre, imageRoute, numberOfCopies){
         this.band = band;
         this.listOfSongs = listOfSongs;
         this.duration = duration;
@@ -19,8 +19,31 @@ public class MusicAlbum : LibraryItem
         this.label = label;
     }
 
-    public override String getData()
+    public override void getData()
     {
-        return "Music";
+        
+        string songLog = "";
+
+        for(int i = 0; i < listOfSongs.Count; i++)
+        {
+            songLog += listOfSongs[i];
+
+            if(!(i + 1 == listOfSongs.Count))
+            {
+                songLog += ", ";
+            }
+        }
+
+        Console.WriteLine(
+            "Item Id: " + this.id + ". " + "\n" +
+            "Title: " + this.title + ". " + " \n" +
+            "Release year: " + this.year + ". " + "\n" +
+            "Genre: " + this.genre + ". " + "\n" +
+            "Available copies: " + this.numberOfCopies + ". " + "\n" +
+            "Band: " + this.band + ". " + "\n" +
+            "Songs: " + songLog + ". " + "\n" +
+            "Duration: " + this.duration + " minutes" + ". " + "\n" +
+            "Studio: " + this.recordingStudio + ". " + "\n" +
+            "Lablel: " + this.label + ". " + "\n");        
     }
 }

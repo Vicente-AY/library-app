@@ -4,15 +4,15 @@ namespace Items;
 
 public class Film : LibraryItem
 {
-    public String[] director {get; set;} = Array.Empty<String>();
-    public String screenWriter {get; set;} = "";
+    public List<string> director {get; set;} = new List<string>();
+    public string screenWriter {get; set;} = "";
     public int duration {get; set;} = 0; //in minutes
-    public String productionCompany {get; set;} = "";
-    public String[] versionLanguages {get; set;} = Array.Empty<String>();
-    public String format {get; set;} = ""; //VHS, DVD
+    public string productionCompany {get; set;} = "";
+    public List<string> versionLanguages {get; set;} = new List<string>();
+    public string format {get; set;} = ""; //VHS, DVD
 
-    public Film(int id, String title, int year, String genre, String imageRoute, int numberOfCopies, 
-                String[] director, String screenWriter, int duration, String productionCompany, String[] versionLanguages, String format)
+    public Film(int id, string title, int year, string genre, string imageRoute, int numberOfCopies, 
+                List<string> director, string screenWriter, int duration, string productionCompany, List<string> versionLanguages, string format)
                 : base(id, title, year, genre, imageRoute, numberOfCopies)
     {
         this.director = director;
@@ -23,8 +23,44 @@ public class Film : LibraryItem
         this.format = format;
     }
 
-    public override String getData()
+    public override void getData()
     {
-        return "Films";
+        
+        string directorLog = "";
+
+        for(int i = 0; i < director.Count; i++)
+        {
+            directorLog += director[i];
+
+            if(!(i + 1 == director.Count))
+            {
+                directorLog += ", ";
+            }
+        }
+
+        string languagesLog = "";
+
+        for(int i = 0; i < versionLanguages.Count; i++)
+        {
+            languagesLog += versionLanguages[i];
+
+            if(!(i + 1 == versionLanguages.Count))
+            {
+                languagesLog += ", ";
+            }
+        }
+
+        Console.WriteLine(
+            "Item Id: " + this.id + ". " + "\n" +
+            "Title: " + this.title + ". " + " \n" +
+            "Release year: " + this.year + ". " + "\n" +
+            "Genre: " + this.genre + ". " + "\n" +
+            "Available copies: " + this.numberOfCopies + ". " + "\n" +
+            "Director/s: " + directorLog + ". " + "\n" +
+            "Screenwriter/s " + this.screenWriter + ". " + "\n" +
+            "Duration: " + this.duration + " minutes" + ". " + "\n" +
+            "Production Company " + this.productionCompany + ". " + "\n" +
+            "Available Languages: " + languagesLog + ". " + "\n" +
+            "Available Format : " + this.format + ". " + "\n");
     }
 }

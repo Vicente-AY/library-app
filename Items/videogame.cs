@@ -4,14 +4,14 @@ namespace Items;
 
 public class Videogame : LibraryItem
 {
-    public String developer {get; set;} = "";
-    public String publisher {get; set;} = "";
-    public String platform {get; set;} = "";
-    public String engine {get; set;} = "";
-    public String[] versionLanguages {get; set;} = Array.Empty<String>();
+    public string developer {get; set;} = "";
+    public string publisher {get; set;} = "";
+    public string platform {get; set;} = "";
+    public string engine {get; set;} = "";
+    public List<string> versionLanguages {get; set;} = new List<string>();
 
-    public Videogame(int id, String title, int year, String genre, String imageRoute, int numberOfCopies, 
-                    String developer, String publisher, String platform, String engine, String[] versionLanguages)
+    public Videogame(int id, string title, int year, string genre, string imageRoute, int numberOfCopies, 
+                    string developer, string publisher, string platform, string engine, List<string> versionLanguages)
                     : base(id, title, year, genre, imageRoute, numberOfCopies)
     {
         this.developer = developer;
@@ -21,8 +21,31 @@ public class Videogame : LibraryItem
         this.versionLanguages = versionLanguages;
     }
 
-    public override String getData()
+    public override void getData()
     {
-        return "games";
+
+        string languagesLog = "";
+
+        for(int i = 0; i < versionLanguages.Count; i++)
+        {
+            languagesLog += versionLanguages[i];
+
+            if(!(i + 1 == versionLanguages.Count))
+            {
+                languagesLog += ", ";
+            }
+        }
+
+        Console.WriteLine(
+            "Item Id: " + this.id + ". " + "\n" +
+            "Title: " + this.title + ". " + " \n" +
+            "Release year: " + this.year + ". " + "\n" +
+            "Genre: " + this.genre + ". " + "\n" +
+            "Available copies: " + this.numberOfCopies + ". " + "\n" +
+            "Developer: " + this.developer + ". " + "\n" +
+            "Publisher " + this.publisher + ". " + "\n" +
+            "Platform: " + this.platform + ". " + "\n" +
+            "Engine: " + this.engine + ". " + "\n" +
+            "Available Languages: " + languagesLog + ". " + "\n");                  
     }
 }

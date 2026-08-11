@@ -7,14 +7,14 @@ namespace Items;
 public abstract class LibraryItem{
     
     public int id {get; set; } = 0;
-    public String title {get; set;} = "";
+    public string title {get; set;} = "";
     public int year {get; set;} = 0;
     public Availability availability {get; set;} = Availability.Available;
-    public String genre {get; set;} = "";
-    public String imageRoute {get; set;} = "";
+    public string genre {get; set;} = "";
+    public string imageRoute {get; set;} = "";
     public int numberOfCopies {get; set;} = 0;
 
-    public LibraryItem(int id, String title, int year, String genre, String imageRoute, int numberOfCopies)
+    public LibraryItem(int id, string title, int year, string genre, string imageRoute, int numberOfCopies)
     {
         this.id = id;
         this.title = title;
@@ -24,5 +24,5 @@ public abstract class LibraryItem{
         this.numberOfCopies = numberOfCopies;
     }
 
-    public abstract String getData();
+    public abstract void getData();
 }
