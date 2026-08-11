@@ -50,15 +50,3 @@ public class Librarian : User
         user.suspended = false;
     }
 }
-
-
-
-    public int id {get; set;} = 0;
-    public string login {get; set;} = "";
-    public string name {get; set;} = "";
-    public string surnames {get; set;} = "";
-    public string password {get; set;} = "";
-    public string address {get; set;} = "";
-    public bool suspended {get; set;} = true; //every user is suspended at the begining
-    public bool blocked {get; set;} = false;
-    public bool delay {get; set;} = false;
