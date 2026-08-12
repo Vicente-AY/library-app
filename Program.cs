@@ -1,9 +1,10 @@
 using Items;
+using Menus;
 
 public class Program{
     static void Main(string[] args)
     {
-        Console.WriteLine("Welcome to Library-app");
+
 
         Book book = new Book(
             1,
@@ -87,9 +88,7 @@ public class Program{
             }
         );
 
-        book.getData();
-        film.getData();
-        musicAlbum.getData();
-        videogame.getData();
+        MainMenu mm = new MainMenu();
+        mm.MainMenuOptions();
     }
 }
