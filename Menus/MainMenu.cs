@@ -18,7 +18,7 @@ public class MainMenu
                 Console.WriteLine("\n" + "Please select an option");
                 Console.WriteLine("1. Login | 2. Register | 3. Exit");
 
-                string input = Console.ReadLine();
+                string? input = Console.ReadLine();
 
                 int option = CheckInput(input);
 
@@ -60,7 +60,7 @@ public class MainMenu
         return;
     }
 
-    public int CheckInput(string input)
+    public int CheckInput(string? input)
     {
         int option = 0;
 
