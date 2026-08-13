@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using ProgramExceptions;
+using Data;
 
 namespace Utils;
 
@@ -25,6 +26,18 @@ public class Verifier
         if(login.Contains(" "))
         {
             throw new WhiteSpaceException("The login has spaces. Please, enter a valid Username");
+        }
+
+        using(var db = new LibraryContext())
+        {
+            var users = db.Users.ToList();
+            foreach(var u in users)
+            {
+                if(u.login == login)
+                {
+                    throw new SameLoginException("The username you provided is already taken. Please, enter a valid Username");
+                }
+            }
         }
 
         return login;
