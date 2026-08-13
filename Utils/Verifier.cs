@@ -1,6 +1,8 @@
+using System.Text.RegularExpressions;
+using ProgramExceptions;
+
 namespace Utils;
 
-using ProgramExceptions;
 public class Verifier
 {
     public static string CheckLogin(string login)
@@ -26,5 +28,18 @@ public class Verifier
         }
 
         return login;
+    }
+
+    public static string CheckPass(string pass)
+    {
+        pass = pass.Trim();
+
+
+        if(!Regex.IsMatch(pass, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{7,}$"))
+        {
+            throw new NotPatternException("The password does not match the stablished pattern. Please, enter a valid Password");
+        }
+
+        return pass;
     }
 }
