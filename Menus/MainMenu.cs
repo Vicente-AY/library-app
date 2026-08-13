@@ -29,8 +29,8 @@ public class MainMenu
                         Console.WriteLine("Aqui va el login");
                         break;
                     case 2:
-                        //register
-                        Console.WriteLine("Aqui va el Registro");
+                        Register register = new Register();
+                        register.RegisterNewUser();
                         break;
                     case 3:
                         Console.WriteLine("Bye!");
