@@ -37,7 +37,7 @@ public class Verifier
 
         if(!Regex.IsMatch(pass, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{7,}$"))
         {
-            throw new NotPatternException("The password does not match the stablished pattern. Please, enter a valid Password");
+            throw new NotPatternException("\nThe password does not match the stablished pattern. Please, enter a valid Password");
         }
 
         return pass;

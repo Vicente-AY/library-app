@@ -11,7 +11,8 @@ public class MainMenu
 
         bool iterate = true;
 
-        Console.WriteLine("Welcome to Library-App");
+        Console.WriteLine("\nWelcome to Library-App");
+        Console.WriteLine("------------------------");
 
         while(iterate){
             try{
