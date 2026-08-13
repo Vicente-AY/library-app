@@ -6,11 +6,11 @@ namespace Data;
 
 public class LibraryContext : DbContext
 {
-    public DbSet<Book> books {get; set;}
-    public DbSet<Film> films {get; set;}
-    public DbSet<MusicAlbum> musicAlbums {get; set;}
-    public DbSet<Videogame> videogames {get; set;}
-    public DbSet<User> users {get; set;}
+    public DbSet<Book> Books {get; set;}
+    public DbSet<Film> Films {get; set;}
+    public DbSet<MusicAlbum> MusicAlbums {get; set;}
+    public DbSet<Videogame> Videogames {get; set;}
+    public DbSet<User> Users {get; set;}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
