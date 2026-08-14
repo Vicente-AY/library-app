@@ -93,7 +93,17 @@ public class Register
                     return "";
                 }
 
-                return Verifier.CheckPass(pass);
+                pass = Verifier.CheckPass(pass);
+
+                Console.WriteLine("\nPlese write the Password again");
+                string? pass2 = Console.ReadLine();
+
+                if (pass2.Equals(pass) || string.IsNullOrEmpty(pass2))
+                {
+                    throw new NotMatchException("The passwords dont match. Please try again");
+                }
+
+                return pass;
             }
             catch (NotPatternException e)
             {
