@@ -4,7 +4,7 @@ using Data;
 
 namespace Utils;
 
-public class Verifier
+public class RegistrationVerifier
 {
     public static string CheckLogin(string login)
     {

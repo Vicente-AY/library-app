@@ -53,7 +53,7 @@ public class Register
                     return "";
                 }
                 
-                return Verifier.CheckLogin(login);
+                return RegistrationVerifier.CheckLogin(login);
             }
             catch(FormatException e)
             {
@@ -93,7 +93,7 @@ public class Register
                     return "";
                 }
 
-                pass = Verifier.CheckPass(pass);
+                pass = RegistrationVerifier.CheckPass(pass);
 
                 Console.WriteLine("\nPlese write the Password again");
                 string? pass2 = Console.ReadLine();
