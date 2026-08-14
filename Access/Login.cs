@@ -31,7 +31,7 @@ public class Login
                 Console.WriteLine("\nPlease, introduce your Password (Type 0 or blank to cancell the login operation)");
                 string? pass = Console.ReadLine();
 
-                if(string.IsNullOrWhiteSpace(pass) || login.Equals("0"))
+                if(string.IsNullOrWhiteSpace(pass) || pass.Equals("0"))
                 {
                     Console.WriteLine("Cancelling login operation");
                     return;

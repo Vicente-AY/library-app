@@ -6,24 +6,18 @@ namespace Utils;
 public class LoginVerifier
 {
 
-    LibraryContext db = new LibraryContext();
     public User? CheckLogin(string? login)
     {
 
-        User? logUser = null;
-
-        List<User> users = db.Users.ToList();
-
-        foreach(var u in users)
+        if (string.IsNullOrWhiteSpace(login))
         {
-            if (u.login.Equals(login))
-            {
-                logUser = u;
-                break;
-            }
+            return null;
         }
 
-        return logUser;
+        using(var db = new LibraryContext())
+        {
+            return db.Users.FirstOrDefault(u => u.login == login);
+        }
     }
 
     public bool CheckPass(string pass, User? user)

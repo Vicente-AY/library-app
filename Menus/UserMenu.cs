@@ -6,10 +6,14 @@ public class UserMenu
 {
     public void OpenUserMenu(User user)
     {
-        if(user.name is null){
-            Console.WriteLine("\nWelcome {user.login}");
+        if(string.IsNullOrWhiteSpace(user.name)){
+            Console.WriteLine($"\nWelcome {user.login}");
         }
-        Console.WriteLine("\nWelcome {user.name}");
+        else
+        {
+            Console.WriteLine($"\nWelcome {user.name}");
+        }
+        
         Console.WriteLine("------------------");
 
         
