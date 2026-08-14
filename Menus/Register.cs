@@ -98,7 +98,7 @@ public class Register
                 Console.WriteLine("\nPlese write the Password again");
                 string? pass2 = Console.ReadLine();
 
-                if (!pass2.Equals(pass) || string.IsNullOrEmpty(pass2))
+                if (string.IsNullOrEmpty(pass2) || !pass2.Equals(pass))
                 {
                     throw new NotMatchException("The passwords dont match. Please try again");
                 }
