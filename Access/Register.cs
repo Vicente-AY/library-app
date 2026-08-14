@@ -3,7 +3,7 @@ using Utils;
 using Users;
 using Data;
 
-namespace Menus;
+namespace Access;
 
 public class Register
 {

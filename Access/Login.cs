@@ -2,7 +2,7 @@ using Users;
 using Utils;
 using ProgramExceptions;
 
-namespace Menus;
+namespace Access;
 
 public class Login
 {
