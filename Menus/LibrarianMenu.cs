@@ -4,7 +4,7 @@ namespace Menus;
 
 public class LibrarianMenu
 {
-    public void OpenUserMenu(Librarian librarian)
+    public void OpenLibrarianMenu(Librarian librarian)
     {
         if(librarian.name is null){
             Console.WriteLine("\nWelcome {librarian.login}");

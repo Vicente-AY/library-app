@@ -1,5 +1,6 @@
 using Users;
 using Utils;
+using Menus;
 using ProgramExceptions;
 
 namespace Access;
@@ -32,7 +33,7 @@ public class Login
 
                 if(string.IsNullOrWhiteSpace(pass) || login.Equals("0"))
                 {
-                    Console.WriteLine("Cancelling login peration");
+                    Console.WriteLine("Cancelling login operation");
                     return;
                 }
 
@@ -46,10 +47,12 @@ public class Login
                 switch (member)
                 {
                     case Librarian librarian:
-                        //menu librarian
+                        LibrarianMenu librarianMenu = new LibrarianMenu();
+                        librarianMenu.OpenLibrarianMenu(librarian);
                         break;
                     case User user:
-                        //menu user
+                        UserMenu userMenu = new UserMenu();
+                        userMenu.OpenUserMenu(user);
                         break;
                     default:
                         throw new Exception("Unexpected Error");

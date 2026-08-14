@@ -27,8 +27,8 @@ public class MainMenu
                 switch (option)
                 {
                     case 1: 
-                        //login
-                        Console.WriteLine("Aqui va el login");
+                        Login login = new Login();
+                        login.LogUser();
                         break;
                     case 2:
                         Register register = new Register();

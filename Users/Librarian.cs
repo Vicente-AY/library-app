@@ -31,6 +31,8 @@ public class Librarian : User
         //añadir el nuevo librarian
     }
 
+    private Librarian(){} //solo para EF Core
+
     public void UnSuspendUser(User user)
     {
         if(user.name == "" && user.surnames == "" && user.address == "")

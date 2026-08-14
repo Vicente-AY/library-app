@@ -22,6 +22,7 @@ public class User
         this.login = login;
         this.password = password;
     }
+    protected User(){} //solo para EF Core
 
     public User(Librarian librarian)
     {
