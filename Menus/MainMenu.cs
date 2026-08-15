@@ -21,7 +21,7 @@ public class MainMenu
 
         while(iterate){
             try{
-                Console.WriteLine("\n" + "Please select an option");
+                Console.WriteLine("\nPlease select an option");
                 Console.WriteLine("1. Login | 2. Register | 3. Exit");
 
                 input = Console.ReadLine();

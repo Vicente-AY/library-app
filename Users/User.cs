@@ -54,14 +54,31 @@ public class User
         Console.WriteLine("\nYour Account information");
         Console.WriteLine("------------------------\n");
 
-        Console.WriteLine("User Id: " + this.id);
-        Console.WriteLine("Username: " + this.login);
-        if(!string.IsNullOrWhiteSpace(this.name)) Console.WriteLine("Name: " + this.name);
-        if(!string.IsNullOrWhiteSpace(this.surnames)) Console.WriteLine("Surnames: " + this.surnames);
-        if(!(this.bDate is null)) Console.WriteLine("Bithdate: " + this.bDate);
-        if(!string.IsNullOrWhiteSpace(this.address)) Console.WriteLine("Address: " + this.address);
-        if(this.suspended && string.IsNullOrWhiteSpace(name)) Console.WriteLine("You need to fill the form");
-        if(this.suspended) Console.WriteLine("Your account is temporaly suspended");
+        Console.WriteLine($"User Id: {this.id}");
+        Console.WriteLine($"Username: {this.login}");
 
+        if (!string.IsNullOrWhiteSpace(this.name)) 
+            Console.WriteLine($"Name: {this.name}");
+
+        if (!string.IsNullOrWhiteSpace(this.surnames)) 
+            Console.WriteLine($"Surnames: {this.surnames}");
+
+        if (this.bDate is not null) 
+            Console.WriteLine($"Birthdate: {this.bDate.Value.ToString("dd/MM/yyyy")}");
+
+        if (!string.IsNullOrWhiteSpace(this.address)) 
+            Console.WriteLine($"Address: {this.address}");
+
+        if (this.suspended)
+        {
+            if (string.IsNullOrWhiteSpace(this.name))
+            {
+                Console.WriteLine("Account status: Suspended (You need to fill the form)");
+            }
+            else
+            {
+                Console.WriteLine("Account status: Temporarily suspended");
+            }
+        }
     }
 }
