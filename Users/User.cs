@@ -48,4 +48,20 @@ public class User
         this.bDate = bDate;
         this.address = address;
     }
+
+    public void CheckData()
+    {
+        Console.WriteLine("\nYour Account information");
+        Console.WriteLine("------------------------\n");
+
+        Console.WriteLine("User Id: " + this.id);
+        Console.WriteLine("Username: " + this.login);
+        if(!string.IsNullOrWhiteSpace(this.name)) Console.WriteLine("Name: " + this.name);
+        if(!string.IsNullOrWhiteSpace(this.surnames)) Console.WriteLine("Surnames: " + this.surnames);
+        if(!(this.bDate is null)) Console.WriteLine("Bithdate: " + this.bDate);
+        if(!string.IsNullOrWhiteSpace(this.address)) Console.WriteLine("Address: " + this.address);
+        if(this.suspended && string.IsNullOrWhiteSpace(name)) Console.WriteLine("You need to fill the form");
+        if(this.suspended) Console.WriteLine("Your account is temporaly suspended");
+
+    }
 }

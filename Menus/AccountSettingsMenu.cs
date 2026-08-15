@@ -1,28 +1,28 @@
+using Users;
 using ProgramExceptions;
-using Access;
 using Utils;
 
 namespace Menus;
 
-public class MainMenu
+public class AccountSettingsMenu
 {
-    int minOption = 1;
-    int maxOption = 3;
-    public void MainMenuOptions()
-    {
+    int minOption = 0;
+    int maxOption = 1000;
 
-        bool iterate = true;
+    public void SettingMenu(User user)
+    {
+        Console.WriteLine("Welcome to Account Settings Menu");
+        Console.WriteLine("--------------------------------");
+
+        bool cont = true;
 
         string? input = "";
         int option = 0;
 
-        Console.WriteLine("\nWelcome to Library-App");
-        Console.WriteLine("------------------------");
-
-        while(iterate){
+        while(cont){
             try{
-                Console.WriteLine("\n" + "Please select an option");
-                Console.WriteLine("1. Login | 2. Register | 3. Exit");
+                Console.WriteLine("\nPlease select an option");
+                Console.WriteLine("1. Check account info");
 
                 input = Console.ReadLine();
 
@@ -31,16 +31,14 @@ public class MainMenu
                 switch (option)
                 {
                     case 1: 
-                        Login login = new Login();
-                        login.LogUser();
+                        user.CheckData();
                         break;
                     case 2:
-                        Register register = new Register();
-                        register.RegisterNewUser();
+                        ;
                         break;
                     case 3:
                         Console.WriteLine("Bye!");
-                        iterate = false;
+                        cont = false;
                         break;
                     default:
                         break;
@@ -63,6 +61,7 @@ public class MainMenu
                 Console.WriteLine(e.Message);
             }
         }
-        return;
+
+    return;
     }
 }
