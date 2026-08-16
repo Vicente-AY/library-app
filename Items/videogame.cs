@@ -19,6 +19,7 @@ public class Videogame : LibraryItem
         this.engine = engine;
         this.versionLanguages = versionLanguages;
     }
+    private Videogame(){} //solo para EF Core
 
     public override void getData()
     {

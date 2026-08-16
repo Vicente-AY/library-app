@@ -12,13 +12,14 @@ public class MusicAlbum : LibraryItem
 
     public MusicAlbum(int id, string title, int year, string genre, string imageRoute, string band, List<string> listOfSongs,
                     int duration, string recordingStudio, string label) : base(id, title, year, genre, imageRoute){
-                        
+
         this.band = band;
         this.listOfSongs = listOfSongs;
         this.duration = duration;
         this.recordingStudio = recordingStudio;
         this.label = label;
     }
+    private MusicAlbum(){} //solo para EF Core
 
     public override void getData()
     {

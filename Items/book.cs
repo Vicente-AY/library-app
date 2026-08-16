@@ -22,6 +22,8 @@ public class Book : LibraryItem
         this.originalLanguage = originalLanguage;
         this.versionLanguage = versionLanguage;
     }
+
+    private Book() : base(){}  //solo para EF Core
     
     
     public override void getData()

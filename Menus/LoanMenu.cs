@@ -1,29 +1,17 @@
 using Users;
-using Utils;
 using ProgramExceptions;
+using Utils;
 
-namespace Menus;
+namespace Menu;
 
-public class UserMenu
+public class LoanMenu
 {
-    int minOption = 0;
-    int userMaxOption = 1000;
-    int librarianMaxOption = 1001;
-
-    public void OpenUserMenu(User user)
+    int minOption = 1;
+    int maxOption = 4;
+    public void OpenLoanMenu(User user)
     {
-
-        int maxOption = GetMaxOption(user);
-
-        if(string.IsNullOrWhiteSpace(user.name)){
-            Console.WriteLine($"\nWelcome {user.login}");
-        }
-        else
-        {
-            Console.WriteLine($"\nWelcome {user.name}");
-        }
-        
-        Console.WriteLine("------------------");
+        Console.WriteLine("\nWelcome to the loan Menu");
+        Console.WriteLine("------------------------\n");
 
         bool iterate = true;
         string? input = "";
@@ -31,8 +19,9 @@ public class UserMenu
 
         while(iterate){
             try{
-                Console.WriteLine("\nPlease select an option");
-                Console.WriteLine("1. Make a Loan | 2. ");
+                Console.WriteLine("Please select an option");
+                Console.WriteLine("1. Show every Item | 2. Make selection by Media | 3. Make selection by Genre");
+                Console.WriteLine("4. Exit");
 
                 input = Console.ReadLine();
 
@@ -71,10 +60,5 @@ public class UserMenu
             }
         }
         return;
-    }
-
-    public int GetMaxOption(User user)
-    {
-        return user is Librarian ? librarianMaxOption : userMaxOption;
     }
 }

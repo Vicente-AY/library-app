@@ -1,0 +1,9 @@
+namespace Loans;
+
+public class CreateLoan
+{
+    public void NewLoan(User user)
+    {
+        
+    }
+}

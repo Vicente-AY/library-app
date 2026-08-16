@@ -6,6 +6,7 @@ namespace Data;
 
 public class LibraryContext : DbContext
 {
+    public DbSet<LibraryItem> LibraryItems {get; set;}
     public DbSet<Book> Books {get; set;}
     public DbSet<Film> Films {get; set;}
     public DbSet<MusicAlbum> MusicAlbums {get; set;}
@@ -23,6 +24,8 @@ public class LibraryContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<User>().HasDiscriminator<string>("UserType").HasValue<User>("StandardUser").HasValue<Librarian>("Librarian");
+
+        modelBuilder.Entity<LibraryItem>().HasDiscriminator<string>(i => i.media).HasValue<Book>("Book").HasValue<Film>("Film").HasValue<MusicAlbum>("MusicAlbum").HasValue<Videogame>("Videogame");
     }
 
 }

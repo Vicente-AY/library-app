@@ -22,6 +22,7 @@ public class Film : LibraryItem
         this.format = format;
     }
 
+    private Film() : base(){}  //solo para EF Core
     public override void getData()
     {
         

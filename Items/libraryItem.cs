@@ -8,6 +8,7 @@ namespace Items;
 public abstract class LibraryItem{
     
     public int id {get; set; } = 0;
+    public string media {get; set;} = "";
     public string title {get; set;} = "";
     public int year {get; set;} = 0;
     public Availability availability {get; set;} = Availability.Available;
@@ -23,6 +24,8 @@ public abstract class LibraryItem{
         this. genre = genre;
         this.imageRoute = imageRoute;
     }
+
+    protected LibraryItem(){}  //solo para EF Core
 
     public abstract void getData();
 }
