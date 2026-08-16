@@ -1,6 +1,9 @@
 using Users;
 using ProgramExceptions;
 using Utils;
+using Data;
+using Items;
+using Loans;
 
 namespace Menu;
 
@@ -10,6 +13,10 @@ public class LoanMenu
     int maxOption = 4;
     public void OpenLoanMenu(User user)
     {
+
+        LibraryContext db = new LibraryContext();
+        List<LibraryItem> items = new List<LibraryItem>();
+
         Console.WriteLine("\nWelcome to the loan Menu");
         Console.WriteLine("------------------------\n");
 
@@ -20,7 +27,7 @@ public class LoanMenu
         while(iterate){
             try{
                 Console.WriteLine("Please select an option");
-                Console.WriteLine("1. Show every Item | 2. Make selection by Media | 3. Make selection by Genre");
+                Console.WriteLine("1. Show all Items | 2. Make selection by Media | 3. Make selection by Genre");
                 Console.WriteLine("4. Exit");
 
                 input = Console.ReadLine();
@@ -30,7 +37,11 @@ public class LoanMenu
                 switch (option)
                 {
                     case 1: 
-                        
+                        items = db.LibraryItems.ToList();
+                        ShowItemsList.ShowItems(items);
+
+                        CreateLoan cLoan = new CreateLoan();
+                        cLoan.LoanCreation(user);
                         break;
                     case 2:
 
