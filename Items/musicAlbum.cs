@@ -10,8 +10,9 @@ public class MusicAlbum : LibraryItem
     public string recordingStudio {get; set;} = "";
     public string label {get; set;} = "";
 
-    public MusicAlbum(int id, string title, int year, string genre, string imageRoute, int numberOfCopies, string band, List<string> listOfSongs,
-                    int duration, string recordingStudio, string label) : base(id, title, year, genre, imageRoute, numberOfCopies){
+    public MusicAlbum(int id, string title, int year, string genre, string imageRoute, string band, List<string> listOfSongs,
+                    int duration, string recordingStudio, string label) : base(id, title, year, genre, imageRoute){
+                        
         this.band = band;
         this.listOfSongs = listOfSongs;
         this.duration = duration;
@@ -39,7 +40,6 @@ public class MusicAlbum : LibraryItem
             "Title: " + this.title + ". " + " \n" +
             "Release year: " + this.year + ". " + "\n" +
             "Genre: " + this.genre + ". " + "\n" +
-            "Available copies: " + this.numberOfCopies + ". " + "\n" +
             "Band: " + this.band + ". " + "\n" +
             "Songs: " + songLog + ". " + "\n" +
             "Duration: " + this.duration + " minutes" + ". " + "\n" +

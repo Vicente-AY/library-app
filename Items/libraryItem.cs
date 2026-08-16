@@ -1,6 +1,7 @@
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 using Utils;
+using Users;
 
 namespace Items;
 
@@ -12,16 +13,15 @@ public abstract class LibraryItem{
     public Availability availability {get; set;} = Availability.Available;
     public string genre {get; set;} = "";
     public string imageRoute {get; set;} = "";
-    public int numberOfCopies {get; set;} = 0;
+    public List<User> waitList {get; set;} = new List<User>();
 
-    public LibraryItem(int id, string title, int year, string genre, string imageRoute, int numberOfCopies)
+    public LibraryItem(int id, string title, int year, string genre, string imageRoute)
     {
         this.id = id;
         this.title = title;
         this.year = year;
         this. genre = genre;
         this.imageRoute = imageRoute;
-        this.numberOfCopies = numberOfCopies;
     }
 
     public abstract void getData();

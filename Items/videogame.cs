@@ -10,9 +10,8 @@ public class Videogame : LibraryItem
     public string engine {get; set;} = "";
     public List<string> versionLanguages {get; set;} = new List<string>();
 
-    public Videogame(int id, string title, int year, string genre, string imageRoute, int numberOfCopies, 
-                    string developer, string publisher, string platform, string engine, List<string> versionLanguages)
-                    : base(id, title, year, genre, imageRoute, numberOfCopies)
+    public Videogame(int id, string title, int year, string genre, string imageRoute, string developer, string publisher, string platform, 
+                    string engine, List<string> versionLanguages) : base(id, title, year, genre, imageRoute)
     {
         this.developer = developer;
         this.publisher = publisher;
@@ -41,7 +40,6 @@ public class Videogame : LibraryItem
             "Title: " + this.title + ". " + " \n" +
             "Release year: " + this.year + ". " + "\n" +
             "Genre: " + this.genre + ". " + "\n" +
-            "Available copies: " + this.numberOfCopies + ". " + "\n" +
             "Developer: " + this.developer + ". " + "\n" +
             "Publisher: " + this.publisher + ". " + "\n" +
             "Platform: " + this.platform + ". " + "\n" +

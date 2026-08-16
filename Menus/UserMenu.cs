@@ -31,8 +31,8 @@ public class UserMenu
 
         while(iterate){
             try{
-                Console.WriteLine("\n" + "Please select an option");
-                Console.WriteLine("1. Login | 2. Register | 3. Exit");
+                Console.WriteLine("\nPlease select an option");
+                Console.WriteLine("1. ");
 
                 input = Console.ReadLine();
 

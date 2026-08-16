@@ -11,9 +11,8 @@ public class Film : LibraryItem
     public List<string> versionLanguages {get; set;} = new List<string>();
     public string format {get; set;} = ""; //VHS, DVD
 
-    public Film(int id, string title, int year, string genre, string imageRoute, int numberOfCopies, 
-                List<string> director, string screenWriter, int duration, string productionCompany, List<string> versionLanguages, string format)
-                : base(id, title, year, genre, imageRoute, numberOfCopies)
+    public Film(int id, string title, int year, string genre, string imageRoute, List<string> director, string screenWriter, int duration,
+                string productionCompany, List<string> versionLanguages, string format) : base(id, title, year, genre, imageRoute)
     {
         this.director = director;
         this.screenWriter = screenWriter;
@@ -55,7 +54,6 @@ public class Film : LibraryItem
             "Title: " + this.title + ". " + " \n" +
             "Release year: " + this.year + ". " + "\n" +
             "Genre: " + this.genre + ". " + "\n" +
-            "Available copies: " + this.numberOfCopies + ". " + "\n" +
             "Director/s: " + directorLog + ". " + "\n" +
             "Screenwriter/s " + this.screenWriter + ". " + "\n" +
             "Duration: " + this.duration + " minutes" + ". " + "\n" +
