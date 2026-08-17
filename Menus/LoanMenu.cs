@@ -166,6 +166,13 @@ public class LoanMenu
         if(searchedItems.Count == 1)
         {
             LibraryItem item = searchedItems[0];
+
+            if(item.availability == Availability.Maintenance)
+            {
+                Console.WriteLine("Sorry, the only Item for the specified name is on Maintenance");
+                return;
+            }
+
             cLoan.LoanCreationFromSingleItem(user, item);
         }
         else
@@ -190,6 +197,13 @@ public class LoanMenu
         if(searchedItems.Count == 1)
         {
             LibraryItem item = searchedItems[0];
+
+            if(item.availability == Availability.Maintenance)
+            {
+                Console.WriteLine("Sorry, the only Item for the specified Genre is on Maintenance");
+                return;
+            }
+
             cLoan.LoanCreationFromSingleItem(user, item);
         }
         else
@@ -215,6 +229,12 @@ public class LoanMenu
 
         ShowItemsList.ShowItems(searchedItems);
         LibraryItem item = searchedItems[0];
+
+        if(item.availability == Availability.Maintenance)
+        {
+            Console.WriteLine("Sorry, the item for the specified Id is on Maintenance");
+            return;
+        }
 
         cLoan.LoanCreationFromSingleItem(user, item);
     }

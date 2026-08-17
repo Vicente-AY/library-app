@@ -20,6 +20,6 @@ public class CreateLoan
 
     public void LoanCreationFromSingleItem(User user, LibraryItem item)
     {
-        
+        Console.WriteLine($"Do you want to Loan {item.title}? (Y/N)");
     }
 }
