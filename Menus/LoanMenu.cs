@@ -11,7 +11,7 @@ public class LoanMenu
 {
     int minOption = 1;
     int maxOption = 5;
-    List<LibraryItem> mediaItems = new List<LibraryItem>();
+    List<LibraryItem> searchedItems = new List<LibraryItem>();
     CreateLoan cLoan = new CreateLoan();
 
     public void OpenLoanMenu(User user)
@@ -31,8 +31,8 @@ public class LoanMenu
         while(iterate){
             try{
                 Console.WriteLine("Please select an option (Type 0 or blank to cancell the operation)");
-                Console.WriteLine("1. Show all Items | 2. Show items by Media | 3. Show Items by Genre");
-                Console.WriteLine("4. Search by Name | 5. Search by Id");
+                Console.WriteLine("1. Show all Items | 2. Show items by Media | 3. Search Items by Name");
+                Console.WriteLine("4. Search Items by Genre | 5. Search Item by Id");
 
                 input = Console.ReadLine();
 
@@ -88,6 +88,13 @@ public class LoanMenu
 
     public void ShowAllItems(User user, List<LibraryItem> items)
     {
+
+        if(items is null)
+        {
+            Console.WriteLine("Sorry, there is no items yet");
+            return;
+        }
+
         ShowItemsList.ShowItems(items);
 
         cLoan.LoanCreationFromSelection(user);
@@ -95,13 +102,87 @@ public class LoanMenu
 
     public void ShowItems(User user, List<LibraryItem> items, Type media)
     {
-        mediaItems.Clear();
+        searchedItems.Clear();
+        searchedItems.AddRange(items.Where(i => i.GetType() == media));
 
-        mediaItems.AddRange(items.Where(i => i.GetType() == media));
+        if(searchedItems is null)
+        {
+            Console.WriteLine("Sorry, there is no item with selected media");
+            return;
+        }
 
-        ShowItemsList.ShowItems(mediaItems);
+        ShowItemsList.ShowItems(searchedItems);
 
         cLoan.LoanCreationFromSelection(user);
+    }
+
+    public void SearchByName(User user, List<LibraryItem> items, string name)
+    {
+        searchedItems.Clear();
+        searchedItems.AddRange(items.Where(i => i.title.Contains(name, StringComparison.OrdinalIgnoreCase)));
+
+        if(searchedItems is null)
+        {
+            Console.WriteLine("Sorry, there is no item with that name");
+            return;
+        }
+
+        ShowItemsList.ShowItems(searchedItems);
+
+        if(searchedItems.Count == 1)
+        {
+            LibraryItem item = searchedItems[0];
+            //metodo para pedir prestado solo ese item
+        }
+        else
+        {
+            cLoan.LoanCreationFromSelection(user);
+        }
+    }
+
+    public void SearchByGenre(User user, List<LibraryItem> items, string genre)
+    {
+        searchedItems.Clear();
+        searchedItems.AddRange(items.Where(i => i.genre.Contains(genre, StringComparison.OrdinalIgnoreCase)));
+
+        if(searchedItems is null)
+        {
+            Console.WriteLine("Sorry, there is no item of that genre");
+            return;
+        }
+
+        ShowItemsList.ShowItems(searchedItems);
+
+        if(searchedItems.Count == 1)
+        {
+            LibraryItem item = searchedItems[0];
+            //metodo para pedir prestado solo ese item
+        }
+        else
+        {
+            cLoan.LoanCreationFromSelection(user);
+        }
+    }
+
+    public void SearchById(User user, List<LibraryItem> items, string id)
+    {
+        if(!int.TryParse(id, out int intId))
+        {
+            throw new FormatException("Please enter a valid Id");
+        }
+        
+        searchedItems.AddRange(items.Where(i => i.id == intId));
+        
+        if(searchedItems is null)
+        {
+            Console.WriteLine("There is no item with that Id");
+            return;
+        }
+
+        ShowItemsList.ShowItems(searchedItems);
+        LibraryItem item = searchedItems[0];
+
+        //metodo para pedir prestado solo ese item
     }
 
 }
