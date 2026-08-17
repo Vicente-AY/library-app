@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Items;
 using Users;
+using Loans;
 
 namespace Data;
 
@@ -13,6 +14,7 @@ public class LibraryContext : DbContext
     public DbSet<Videogame> Videogames {get; set;}
     public DbSet<User> Users {get; set;}
     public DbSet<Librarian> Librarians {get; set;}
+    public DbSet<Loan> Loans {get; set;}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
