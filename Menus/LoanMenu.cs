@@ -5,17 +5,19 @@ using Data;
 using Items;
 using Loans;
 
-namespace Menu;
+namespace Menus;
 
 public class LoanMenu
 {
     int minOption = 1;
-    int maxOption = 4;
+    int maxOption = 5;
+    List<LibraryItem> mediaItems = new List<LibraryItem>();
+    CreateLoan cLoan = new CreateLoan();
+
     public void OpenLoanMenu(User user)
     {
-
         LibraryContext db = new LibraryContext();
-        List<LibraryItem> items = new List<LibraryItem>();
+        List<LibraryItem> items = db.LibraryItems.ToList();
 
         Console.WriteLine("\nWelcome to the loan Menu");
         Console.WriteLine("------------------------\n");
@@ -24,27 +26,38 @@ public class LoanMenu
         string? input = "";
         int option = 0;
 
+        Type? selectedType = null;
+
         while(iterate){
             try{
-                Console.WriteLine("Please select an option");
-                Console.WriteLine("1. Show all Items | 2. Make selection by Media | 3. Make selection by Genre");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("Please select an option (Type 0 or blank to cancell the operation)");
+                Console.WriteLine("1. Show all Items | 2. Show items by Media | 3. Show Items by Genre");
+                Console.WriteLine("4. Search by Name | 5. Search by Id");
 
                 input = Console.ReadLine();
+
+                if(string.IsNullOrWhiteSpace(input) || input.Equals("0"))
+                {
+                    Console.WriteLine("Cancelling Loan Operation");
+                    return;
+                }
 
                 option = InputValidation.CheckInput(input, minOption, maxOption);
 
                 switch (option)
                 {
                     case 1: 
-                        items = db.LibraryItems.ToList();
-                        ShowItemsList.ShowItems(items);
-
-                        CreateLoan cLoan = new CreateLoan();
-                        cLoan.LoanCreation(user);
+                        ShowAllItems(user, items);
+                        iterate = false;
                         break;
                     case 2:
-
+                        MediaSelectionMenu mediaMenu = new MediaSelectionMenu();
+                        selectedType = mediaMenu.SelectMedia();
+                        if(selectedType != null)
+                        {
+                            ShowItems(user, items, selectedType);
+                            iterate = false;
+                        }
                         break;
                     case 3:
                         iterate = false;
@@ -72,4 +85,23 @@ public class LoanMenu
         }
         return;
     }
+
+    public void ShowAllItems(User user, List<LibraryItem> items)
+    {
+        ShowItemsList.ShowItems(items);
+
+        cLoan.LoanCreationFromSelection(user);
+    }
+
+    public void ShowItems(User user, List<LibraryItem> items, Type media)
+    {
+        mediaItems.Clear();
+
+        mediaItems.AddRange(items.Where(i => i.GetType() == media));
+
+        ShowItemsList.ShowItems(mediaItems);
+
+        cLoan.LoanCreationFromSelection(user);
+    }
+
 }
