@@ -15,6 +15,7 @@ public abstract class LibraryItem{
     public string genre {get; set;} = "";
     public string imageRoute {get; set;} = "";
     public List<User> waitList {get; set;} = new List<User>();
+    public bool lost {get; set;} = false;
 
     public LibraryItem(int id, string title, int year, string genre, string imageRoute)
     {

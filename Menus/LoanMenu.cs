@@ -17,7 +17,7 @@ public class LoanMenu
     public void OpenLoanMenu(User user)
     {
         LibraryContext db = new LibraryContext();
-        List<LibraryItem> items = db.LibraryItems.ToList();
+        List<LibraryItem> items = db.LibraryItems.Where(i => !i.lost).ToList();
 
         Console.WriteLine("\nWelcome to the loan Menu");
         Console.WriteLine("------------------------\n");
@@ -232,7 +232,7 @@ public class LoanMenu
 
         if(item.availability == Availability.Maintenance)
         {
-            Console.WriteLine("Sorry, the item for the specified Id is on Maintenance");
+            Console.WriteLine("Sorry, the selected Item is on Maintenance");
             return;
         }
 
