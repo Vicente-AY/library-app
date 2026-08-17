@@ -60,6 +60,36 @@ public class LoanMenu
                         }
                         break;
                     case 3:
+                        Console.WriteLine("\nEnter the Name of the item you are looking for");
+                        string? name = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(name))
+                        {
+                            Console.WriteLine("Please enter a valid value");
+                            break;
+                        }
+                        SearchByName(user, items, name);
+                        iterate = false;
+                        break;
+                    case 4:
+                        Console.WriteLine("\nEnter the Genre you are looking for");
+                        string? genre = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(genre))
+                        {
+                            Console.WriteLine("Please enter a valid value");
+                            break;
+                        }
+                        SearchByGenre(user, items, genre);
+                        iterate = false;
+                        break;
+                    case 5:
+                        Console.WriteLine("\nEnter the Id of the Item your are looking for");
+                        string? id = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(id))
+                        {
+                            Console.WriteLine("Please enter a valid value");
+                            break;
+                        }
+                        SearchById(user, items, id);
                         iterate = false;
                         break;
                     default:
@@ -132,7 +162,7 @@ public class LoanMenu
         if(searchedItems.Count == 1)
         {
             LibraryItem item = searchedItems[0];
-            //metodo para pedir prestado solo ese item
+            cLoan.LoanCreationFromSingleItem(user, item);
         }
         else
         {
@@ -156,7 +186,7 @@ public class LoanMenu
         if(searchedItems.Count == 1)
         {
             LibraryItem item = searchedItems[0];
-            //metodo para pedir prestado solo ese item
+            cLoan.LoanCreationFromSingleItem(user, item);
         }
         else
         {
@@ -182,7 +212,7 @@ public class LoanMenu
         ShowItemsList.ShowItems(searchedItems);
         LibraryItem item = searchedItems[0];
 
-        //metodo para pedir prestado solo ese item
+        cLoan.LoanCreationFromSingleItem(user, item);
     }
 
 }

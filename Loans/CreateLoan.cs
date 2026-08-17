@@ -18,7 +18,7 @@ public class CreateLoan
 
     }
 
-    public void LoanCreationFromSingleItem(User user)
+    public void LoanCreationFromSingleItem(User user, LibraryItem item)
     {
         
     }
