@@ -2,6 +2,7 @@ using Users;
 using Utils;
 using Items;
 using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Loans;
 
@@ -46,9 +47,22 @@ public class SelectItems
 
                 return libraryItems;
             }
+            catch(ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch(IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch(InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch(DbUpdateConcurrencyException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
-
-
-            
     }
 }
