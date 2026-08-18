@@ -29,10 +29,19 @@ public class CreateLoan
             }
         }
 
-
-        
-
-
+        foreach(var sItem in selectedItems)
+        {
+            if(sItem.availability == Availability.Available){
+                LoanCreation(user, sItem);
+            }
+            else
+            {
+                if (!sItem.waitList.Contains(user))
+                {
+                    sItem.waitList.Add(user);
+                }
+            }
+        }
     }
 
     public void LoanCreationFromSingleItem(User user, LibraryItem item)

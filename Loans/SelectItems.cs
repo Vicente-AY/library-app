@@ -17,7 +17,6 @@ public class SelectItems
         LibraryContext db = new LibraryContext();
 
         List<LibraryItem> libraryItems = new List<LibraryItem>();
-        LibraryItem? item = null;
         
         List<string> inputString = new List<string>();
         List<int> itemsIds = new List<int>();
