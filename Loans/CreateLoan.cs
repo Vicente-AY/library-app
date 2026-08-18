@@ -10,6 +10,8 @@ public class CreateLoan
     public void LoanCreationFromSelection(User user)
     {
 
+        LibraryContext db = new LibraryContext();
+
         SelectItems itemSelection = new SelectItems();
         List<LibraryItem>? selectedItems = itemSelection.ItemSelection(user);
 
@@ -32,7 +34,7 @@ public class CreateLoan
         foreach(var sItem in selectedItems)
         {
             if(sItem.availability == Availability.Available){
-                LoanCreation(user, sItem);
+                LoanCreation(user, sItem, db);
             }
             else
             {
@@ -42,10 +44,14 @@ public class CreateLoan
                 }
             }
         }
+
+        db.SaveChanges();
     }
 
     public void LoanCreationFromSingleItem(User user, LibraryItem item)
     {
+        
+        LibraryContext db = new LibraryContext();
 
         Console.WriteLine($"\nSelected Item: {item.id} | {item.title}");
 
@@ -62,6 +68,7 @@ public class CreateLoan
                 }
 
                 item.waitList.Add(user);
+                db.SaveChanges();
             }
             else
             {
@@ -91,27 +98,26 @@ public class CreateLoan
                 return;
             }
 
-            Loan loan = LoanCreation(user, item);
-
-            user.loanList.Add(loan);
-            item.availability = Availability.Lent;
+            LoanCreation(user, item, db);
         }
+
+        db.SaveChanges();
     }
 
-    private Loan LoanCreation(User user, LibraryItem item)
+    private void LoanCreation(User user, LibraryItem item, LibraryContext db)
     {
 
         int id = 0;
         DateTime loanCreated = DateTime.Now;
         int days = (item is Book) ? 15 : 7;
         DateTime expectedReturn = loanCreated.AddDays(days);
-        
-        LibraryContext db = new LibraryContext();
 
-        id = db.Loans.Max(i => i.id) + 1 ;
+        id = (db.Loans.Select(i => (int?)i.id).Max() ?? 0) + 1 ;
 
-        expectedReturn.AddDays(days);
+        Loan loan = new Loan(id, item, loanCreated, expectedReturn, user);
 
-        return new Loan(id, item, loanCreated, expectedReturn, user);
+        db.Loans.Add(loan);
+        user.loanList.Add(loan);
+        item.availability = Availability.Lent;
     }
 }

@@ -39,7 +39,7 @@ public class Login
 
                 bool validPass = logVerifier.CheckPass(pass, member);
 
-                if(member is null && !validPass)
+                if(member is null || !validPass)
                 {
                     throw new NotValidLoginException("\nThe information provided does not match. Please try again");
                 }

@@ -9,6 +9,8 @@ public class RegistrationVerifier
     public static string CheckLogin(string login)
     {
 
+        LibraryContext db = new LibraryContext();
+
         login = login.Trim();
 
         if (int.TryParse(login, out _))
@@ -28,16 +30,9 @@ public class RegistrationVerifier
             throw new WhiteSpaceException("The login has spaces. Please, enter a valid Username");
         }
 
-        using(var db = new LibraryContext())
+        if(db.Users.Any(u => u.login == login))
         {
-            var users = db.Users.ToList();
-            foreach(var u in users)
-            {
-                if(u.login == login)
-                {
-                    throw new SameLoginException("The username you provided is already taken. Please, enter a valid Username");
-                }
-            }
+            throw new SameLoginException("The username you provided is already taken. Please, enter a valid Username");
         }
 
         return login;
