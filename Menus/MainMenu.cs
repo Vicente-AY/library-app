@@ -64,7 +64,7 @@ public class MainMenu
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine($"Unexpected error: {e.Message}");
             }
         }
         return;

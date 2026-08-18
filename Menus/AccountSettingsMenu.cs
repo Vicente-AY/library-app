@@ -62,7 +62,7 @@ public class AccountSettingsMenu
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine($"Unexpected error: {e.Message}");
             }
         }
 

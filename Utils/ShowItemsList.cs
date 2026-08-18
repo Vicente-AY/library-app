@@ -11,7 +11,7 @@ public class ShowItemsList
     {
         foreach(var i in items)
         {
-            Console.WriteLine($"Id: {i.id} | {i.title} | {i.media} | {i.availability}");
+            Console.WriteLine($"Id: {i.id} | {i.title} | {i.media} | {i.year} | {i.genre} |{i.availability}");
         }
     }
 }

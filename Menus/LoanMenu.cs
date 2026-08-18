@@ -16,10 +16,15 @@ public class LoanMenu
 
     public void OpenLoanMenu(User user)
     {
+
+        int totalLoans = (user is Librarian) ? 10 : 5;
+        int loansLeft = totalLoans - user.loanList.Count();
+
         LibraryContext db = new LibraryContext();
         List<LibraryItem> items = db.LibraryItems.Where(i => !i.lost).ToList();
 
         Console.WriteLine("\nWelcome to the loan Menu");
+        Console.WriteLine($"Loans available: {loansLeft}");
         Console.WriteLine("------------------------\n");
 
         bool iterate = true;
@@ -114,7 +119,7 @@ public class LoanMenu
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine($"Unexpected error: {e.Message}");
             }
         }
         return;

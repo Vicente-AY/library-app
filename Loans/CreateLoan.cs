@@ -9,9 +9,26 @@ public class CreateLoan
 {
     public void LoanCreationFromSelection(User user)
     {
+
         SelectItems itemSelection = new SelectItems();
-        List<LibraryItem>? selectedItems = new List<LibraryItem>();
-        selectedItems = itemSelection.ItemSelection(user);
+        List<LibraryItem>? selectedItems = itemSelection.ItemSelection(user);
+
+        if(selectedItems is null)
+        {
+            return;
+        }
+
+        if(selectedItems.Exists(i => i.availability == Availability.Lent || i.availability == Availability.Maintenance))
+        {
+            Console.WriteLine("There are Items on your selection that are on Loan or on Maintenance. Do you want to join their waitlist? (Type 0 or blank to decline)");
+            string? input = Console.ReadLine();
+
+            if(string.IsNullOrWhiteSpace(input) || input.Equals("0"))
+            {
+                selectedItems = selectedItems.Where(i => i.availability == Availability.Available).ToList();
+            }
+        }
+
 
         
 
@@ -21,18 +38,27 @@ public class CreateLoan
     public void LoanCreationFromSingleItem(User user, LibraryItem item)
     {
 
-        if(item.availability == Availability.Lent)
-        {
-            Console.WriteLine("The selected Item is currently on a Loan. Do you want to enter the wait list? (Type 0 or blank to decline)");
-            string? waitlist = Console.ReadLine();
+        Console.WriteLine($"\nSelected Item: {item.id} | {item.title}");
 
-            if(string.IsNullOrWhiteSpace(waitlist) || waitlist.Equals("0"))
+        if(item.availability == Availability.Lent || item.availability == Availability.Maintenance)
+        {
+            if(!item.waitList.Contains(user)){
+                Console.WriteLine("The selected Item is currently on a Loan or on Maintenance. Do you want to enter the wait list? (Type 0 or blank to decline)");
+                string? waitlist = Console.ReadLine();
+
+                if(string.IsNullOrWhiteSpace(waitlist) || waitlist.Equals("0"))
+                {
+                    Console.WriteLine("Canceling wait list operation");
+                    return;
+                }
+
+                item.waitList.Add(user);
+            }
+            else
             {
-                Console.WriteLine("Canceling Loan operation");
+                Console.WriteLine("Your already on the wait list for the selected Item");
                 return;
             }
-
-            item.waitList.Add(user);
         }
         else
         {
@@ -68,28 +94,12 @@ public class CreateLoan
 
         int id = 0;
         DateTime loanCreated = DateTime.Now;
-        DateTime expectedReturn = new DateTime();
-        int days = 15;
-
+        int days = (item is Book) ? 15 : 7;
+        DateTime expectedReturn = loanCreated.AddDays(days);
         
         LibraryContext db = new LibraryContext();
 
-        var loans = db.Loans.ToList();
-
-        foreach(var l in loans)
-        {
-            if (l.id > id)
-            {
-                id = l.id;
-            }
-        }
-
-        id++;
-
-        if(!(item is Book))
-        {
-            days = 7;
-        }
+        id = db.Loans.Max(i => i.id) + 1 ;
 
         expectedReturn.AddDays(days);
 

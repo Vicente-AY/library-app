@@ -73,7 +73,7 @@ public class Register
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine($"Unexpected error: {e.Message}");
             }
         }
     }
