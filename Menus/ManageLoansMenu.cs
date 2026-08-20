@@ -2,6 +2,7 @@ using Users;
 using ProgramExceptions;
 using Utils;
 using Loans;
+using Data;
 
 namespace Menus;
 
@@ -16,7 +17,7 @@ public class ManageLoansMenu
 
         if(user.loanList is null)
         {
-            Console.WriteLine("\nYou dont have any current Loans. Closing Loan Management Menu");
+            Console.WriteLine("You dont have any current Loans. Closing Loan Management Menu");
             return;
         }
 
@@ -33,7 +34,7 @@ public class ManageLoansMenu
 
                 if(string.IsNullOrWhiteSpace(input) || input.Equals("0"))
                 {
-                    Console.WriteLine("Returning to User Main Manu");
+                    Console.WriteLine("\nReturning to User Main Manu");
                     return;
                 }
 
@@ -46,12 +47,13 @@ public class ManageLoansMenu
                         userLoans.ShowLoans(user);
                         break;
                     case 2:
-
+                        ReturnItems(user);
                         break;
                     case 3:
-                        iterate = false;
+                        
                         break;
                     default:
+                        Console.WriteLine("\nUnrecogniced Option. Plese select a valid one");
                         break;
                 }
             }
@@ -73,9 +75,64 @@ public class ManageLoansMenu
             }
             catch(Exception e)
             {
-                Console.WriteLine($"Unexpected error: {e.Message}");
+                Console.WriteLine($"\nUnexpected error: {e.Message}");
             }
         }
         return;
+    }
+
+    public void ReturnItems(User user)
+    {
+        
+        LibraryContext db = new LibraryContext();
+
+        DateTime cancelationTime = DateTime.Now;
+
+        Console.WriteLine("\nPlease, insert the ids for the items you want to return separated by a comma, r just the id if is just one item");
+        Console.WriteLine("Type 0 or blank to cancell the operation");
+        string? input = Console.ReadLine();
+
+        if(string.IsNullOrWhiteSpace(input) || input.Equals("0"))
+        {
+            Console.WriteLine("\nCancelling return operation");
+            return;
+        }
+
+        List<string> inputString = input.Split(',').Select(s => s.Trim()).ToList();
+        List<int> itemsIds = StringToIntConvertor.ConvertStringToInt(inputString).Distinct().ToList();
+
+        var cancelLoans = user.loanList.Where(i => i.active && itemsIds.Contains(i.item.id)).ToList();
+
+        if(cancelLoans.Count == 0)
+        {
+            Console.WriteLine("No active loans matched the provided Id/s");
+            return;
+        }
+
+        foreach(var l in cancelLoans)
+        {
+            var item = l.item;
+            if(l.item.waitList.Count > 0)
+            {
+                item.waitList[0].user.notifications.Add($"{cancelationTime.ToString("dd/MM/yyyy : hh:mm")} - Available to pick up: {item.id} {item.title}");
+                item.waitList[0].notifiedAt = cancelationTime;
+                item.waitList[0].expirationDate = cancelationTime.AddDays(2);
+            }
+            else
+            {
+                l.item.availability = Availability.Available;
+            }
+
+            l.itemReturned = DateTime.Now;
+
+            TimeSpan loanDuration = cancelationTime - l.loanCreated;
+
+            l.loanExtension = loanDuration.Days;
+            l.active = false;
+
+            user.loanList.Remove(l);
+        }
+
+        db.SaveChanges();
     }
 }

@@ -41,7 +41,7 @@ public class SelectItems
                 inputString = input.Split(',').Select(s => s.Trim()).ToList();
                 itemsIds = StringToIntConvertor.ConvertStringToInt(inputString);
 
-                libraryItems = db.LibraryItems.Where(i => itemsIds.Contains(i.id)).ToList();
+                libraryItems = db.LibraryItems.Include(i => i.waitList).ThenInclude(w => w.user).Where(i => itemsIds.Contains(i.id)).ToList();
 
                 availableLibraryItems = libraryItems.Where(i => i.availability == Availability.Available).ToList();
                 if(availableLibraryItems.Count > loansLeft)

@@ -38,9 +38,9 @@ public class CreateLoan
             }
             else
             {
-                if (!sItem.waitList.Contains(user))
+                if (!sItem.waitList.Any(w => w.user == user))
                 {
-                    sItem.waitList.Add(user);
+                    sItem.waitList.Add(WaitListCreation(user, sItem));
                 }
             }
         }
@@ -57,7 +57,7 @@ public class CreateLoan
 
         if(item.availability == Availability.Lent || item.availability == Availability.Maintenance)
         {
-            if(!item.waitList.Contains(user)){
+            if(!item.waitList.Any(w => w.user ==user)){
                 Console.WriteLine("The selected Item is currently on a Loan or on Maintenance. Do you want to enter the wait list? (Type 0 or blank to decline)");
                 string? waitlist = Console.ReadLine();
 
@@ -67,7 +67,7 @@ public class CreateLoan
                     return;
                 }
 
-                item.waitList.Add(user);
+                item.waitList.Add(WaitListCreation(user, item));
                 db.SaveChanges();
             }
             else
@@ -120,5 +120,11 @@ public class CreateLoan
         user.loanList.Add(loan);
         user.notifications.Add($"{loanCreated.ToString("dd--MM-yyyy | HH:mm:ss")}. Successfuly loaned {item.title}");
         item.availability = Availability.Lent;
+    }
+
+    private WaitList WaitListCreation(User user, LibraryItem item)
+    {
+        DateTime waitListRequest = DateTime.Now;
+        return new WaitList(user, item, waitListRequest);
     }
 }

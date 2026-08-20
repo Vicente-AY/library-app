@@ -1,5 +1,6 @@
 using Users;
 using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Utils;
 
@@ -14,9 +15,12 @@ public class LoginVerifier
             return null;
         }
 
-        using(var db = new LibraryContext())
+        using(LibraryContext db = new LibraryContext())
         {
-            return db.Users.FirstOrDefault(u => u.login == login);
+            return db.Users.Include(u => u.notifications)
+                .Include(l => l.loanList).ThenInclude(i => i.item)
+                .ThenInclude(w => w.waitList).ThenInclude(u => u.user)
+                .FirstOrDefault(u => u.login == login);
         }
     }
 
