@@ -32,7 +32,7 @@ public class UserMenu
         while(iterate){
             try{
                 Console.WriteLine("\nPlease select an option");
-                Console.WriteLine("1. Make a Loan | 2. Return an Item | 3. ");
+                Console.WriteLine("1. Make a Loan | 2. Manage Loans | 3. ");
 
                 input = Console.ReadLine();
 
@@ -48,7 +48,7 @@ public class UserMenu
 
                         break;
                     case 3:
-                        iterate = false;
+                    
                         break;
                     default:
                         break;

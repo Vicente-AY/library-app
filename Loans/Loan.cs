@@ -6,10 +6,10 @@ namespace Loans;
 public class Loan
 {
     public int id {get; set;} = 0;
-    public LibraryItem? item {get; set;} = null;
-    public DateTime? loanCreated {get; set;} = null;
-    public DateTime? expectedReturn {get; set;} = null;
-    public DateTime? itemReturned {get; set;} = null;
+    public LibraryItem item {get; set;} = null!;
+    public DateTime loanCreated {get; set;} = new DateTime(2000, 01, 01);
+    public DateTime expectedReturn {get; set;} = new DateTime(2000, 01, 01);
+    public DateTime itemReturned {get; set;} = new DateTime(2000, 01, 01);
     public int loanExtension {get; set;} = 0; //loan time in days
     public bool extended {get; set;} = false;
     public User? user {get; set;} = null;
