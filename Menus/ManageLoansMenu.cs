@@ -11,8 +11,14 @@ public class ManageLoansMenu
     int maxOption = 1000;
     public void OpenManageLoansMenu(User user)
     {
-        Console.WriteLine("\nWelcome to he Manage Loans Menu");   
+        Console.WriteLine("\nWelcome to he Loan Management Menu");   
         Console.WriteLine("------------------\n");
+
+        if(user.loanList is null)
+        {
+            Console.WriteLine("\nYou dont have any current Loans. Closing Loan Management Menu");
+            return;
+        }
 
         bool iterate = true;
         string? input = "";
@@ -21,7 +27,7 @@ public class ManageLoansMenu
         while(iterate){
             try{
                 Console.WriteLine("Please select an option (Type 0 or blank to close the menu)");
-                Console.WriteLine("1. See Loans");
+                Console.WriteLine("1. Consult Loans | 2. Return Item/s");
 
                 input = Console.ReadLine();
 
@@ -36,7 +42,8 @@ public class ManageLoansMenu
                 switch (option)
                 {
                     case 1: 
-                        ShowLoans(user);
+                        ShowUserLoans userLoans = new ShowUserLoans();
+                        userLoans.ShowLoans(user);
                         break;
                     case 2:
 
@@ -70,30 +77,5 @@ public class ManageLoansMenu
             }
         }
         return;
-    }
-
-    private void ShowLoans(User user)
-    {
-
-        DateTime now = DateTime.Now;
-        
-        if(user.loanList is null)
-        {
-            Console.WriteLine("\nYou dont have any current Loan");
-            return;
-        }
-
-        Console.WriteLine("Your Loans");
-        Console.WriteLine("----------\n");
-
-        foreach(var l in user.loanList)
-        {
-
-            TimeSpan daysLeft = l.expectedReturn - now;
-            int days = daysLeft.Days;
-
-            Console.WriteLine($"Item: {l.id} {l.item.title} Media: {l.item.media}" + 
-                $"Expected return: {l.expectedReturn!.ToString("dd/MM/yyyy")} Days left: {days}");
-        }
     }
 }
