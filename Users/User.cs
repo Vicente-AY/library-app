@@ -15,6 +15,7 @@ public class User
     public bool blocked {get; set;} = false;
     public bool delay {get; set;} = false;
     public List<Loan> loanList {get; set;} = new List<Loan>();
+    public List<string> notifications {get; set;} = new List<string>();
 
     public User(int id, string login, string password)
     {

@@ -118,6 +118,7 @@ public class CreateLoan
 
         db.Loans.Add(loan);
         user.loanList.Add(loan);
+        user.notifications.Add($"{loanCreated.ToString("dd--MM-yyyy | HH:mm:ss")}. Successfuly loaned {item.title}");
         item.availability = Availability.Lent;
     }
 }

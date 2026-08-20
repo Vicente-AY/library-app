@@ -7,7 +7,7 @@ using Loans;
 
 namespace Menus;
 
-public class LoanMenu
+public class NewLoanMenu
 {
     int minOption = 1;
     int maxOption = 5;
@@ -23,7 +23,7 @@ public class LoanMenu
         LibraryContext db = new LibraryContext();
         List<LibraryItem> items = db.LibraryItems.Where(i => !i.lost).ToList();
 
-        Console.WriteLine("\nWelcome to the loan Menu");
+        Console.WriteLine("\nWelcome to the Loan Menu");
         Console.WriteLine($"Loans available: {loansLeft}");
         Console.WriteLine("------------------------\n");
 
@@ -125,7 +125,7 @@ public class LoanMenu
         return;
     }
 
-    public void ShowAllItems(User user, List<LibraryItem> items)
+    private void ShowAllItems(User user, List<LibraryItem> items)
     {
 
         if(items is null)
@@ -139,7 +139,7 @@ public class LoanMenu
         cLoan.LoanCreationFromSelection(user);
     }
 
-    public void ShowItems(User user, List<LibraryItem> items, Type media)
+    private void ShowItems(User user, List<LibraryItem> items, Type media)
     {
         searchedItems.Clear();
         searchedItems.AddRange(items.Where(i => i.GetType() == media));
@@ -155,7 +155,7 @@ public class LoanMenu
         cLoan.LoanCreationFromSelection(user);
     }
 
-    public void SearchByName(User user, List<LibraryItem> items, string name)
+    private void SearchByName(User user, List<LibraryItem> items, string name)
     {
         searchedItems.Clear();
         searchedItems.AddRange(items.Where(i => i.title.Contains(name, StringComparison.OrdinalIgnoreCase)));
@@ -180,7 +180,7 @@ public class LoanMenu
         }
     }
 
-    public void SearchByGenre(User user, List<LibraryItem> items, string genre)
+    private void SearchByGenre(User user, List<LibraryItem> items, string genre)
     {
         searchedItems.Clear();
         searchedItems.AddRange(items.Where(i => i.genre.Contains(genre, StringComparison.OrdinalIgnoreCase)));
@@ -205,7 +205,7 @@ public class LoanMenu
         }
     }
 
-    public void SearchById(User user, List<LibraryItem> items, string id)
+    private void SearchById(User user, List<LibraryItem> items, string id)
     {
         if(!int.TryParse(id, out int intId))
         {

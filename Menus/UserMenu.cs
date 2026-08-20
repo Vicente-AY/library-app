@@ -6,7 +6,7 @@ namespace Menus;
 
 public class UserMenu
 {
-    int minOption = 0;
+    int minOption = 1;
     int userMaxOption = 1000;
     int librarianMaxOption = 1001;
 
@@ -32,7 +32,7 @@ public class UserMenu
         while(iterate){
             try{
                 Console.WriteLine("\nPlease select an option");
-                Console.WriteLine("1. Make a Loan | 2. ");
+                Console.WriteLine("1. Make a Loan | 2. Return an Item | 3. ");
 
                 input = Console.ReadLine();
 
@@ -41,7 +41,8 @@ public class UserMenu
                 switch (option)
                 {
                     case 1: 
-                        
+                        NewLoanMenu loanMenu = new NewLoanMenu();
+                        loanMenu.OpenLoanMenu(user);
                         break;
                     case 2:
 
