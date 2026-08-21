@@ -7,7 +7,7 @@ public class LoanSelection
 {
     public List<Loan>? SelectLoans(User user)
     {
-        Console.WriteLine("\nPlease, insert the ids for the items you want to select separated by a comma, or just the id if is just one item");
+        
         Console.WriteLine("Type 0 or blank to cancell the operation");
         string? input = Console.ReadLine();
 

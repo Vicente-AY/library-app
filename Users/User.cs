@@ -15,7 +15,7 @@ public class User
     public DateTime? suspensionStart {get; set;} = null;
     public DateTime? suspensionUntil {get; set;} = null;
     public bool blocked {get; set;} = false;
-    public bool delay {get; set;} = false;
+    public int delayPoints {get; set;} = 0;
     public List<Loan> loanList {get; set;} = new List<Loan>();
     public List<string> notifications {get; set;} = new List<string>();
 
@@ -38,7 +38,7 @@ public class User
         this.address = librarian.address;
         this.suspended = librarian.suspended;
         this.blocked = librarian.blocked;
-        this.delay = librarian.delay;
+        this.delayPoints = librarian.delayPoints;
 
         //delete librarian
         //add user
@@ -50,8 +50,6 @@ public class User
         this.surnames = surnames;
         this.bDate = bDate;
         this.address = address;
-
-        this.suspended = false;
     }
 
     public void CheckData()

@@ -15,7 +15,7 @@ public class LoanTermination
         DateTime cancelationTime = DateTime.Now;
 
         LoanSelection selectLoans = new LoanSelection();
-        Console.WriteLine("\nPlease select the Item/s you want to return");
+        Console.WriteLine("\nPlease, insert the ids for the items you want to return by a comma, or just the id if is just one item");
         List<Loan>? cancelLoans = selectLoans.SelectLoans(user);
 
         if(cancelLoans is null)
@@ -27,6 +27,7 @@ public class LoanTermination
         {
 
             CheckItemStatus(l.item, user);
+            CheckLoanTimeSpanExceed(l, user);
 
             var item = l.item;
             if(l.item.waitList.Count > 0 && l.item.availability != Availability.Maintenance)
@@ -43,7 +44,7 @@ public class LoanTermination
             l.itemReturned = cancelationTime;
 
             TimeSpan loanDuration = cancelationTime - l.loanCreated;
-            float duration = loanDuration.Days;
+            double duration = loanDuration.TotalDays;
 
             l.loanExtension = (int)Math.Round(duration);
             l.active = false;
@@ -67,6 +68,21 @@ public class LoanTermination
 
             user.suspended = true;
             user.suspensionStart = DateTime.Now;
+        }
+    }
+
+    private void CheckLoanTimeSpanExceed(Loan loan, User user)
+    {
+        DateTime now = DateTime.Now;
+        if(now > loan.expectedReturn)
+        {
+            TimeSpan duration = now - loan.expectedReturn;
+            double totalDays = duration.TotalDays;
+            int days = (int) Math.Round(totalDays);
+            loan.penalized = true;
+            loan.delayed = true;
+
+            user.delayPoints += days;
         }
     }
 }

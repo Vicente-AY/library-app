@@ -11,9 +11,9 @@ public class Librarian : User
             Console.WriteLine("Please fill the form with the user data");
             return;
         }
-        if(user.blocked == true || user.delay == true)
+        if(user.blocked == true || user.suspended == true)
         {
-            Console.WriteLine("The user is blocked or still in a delay suspension period. Cannot be promoted");
+            Console.WriteLine("The user is blocked or still in a suspension period. Cannot be promoted");
             return;
         }
 
@@ -25,7 +25,7 @@ public class Librarian : User
         this.address = user.address;
         this.suspended = user.suspended;
         this.blocked = user.blocked;
-        this.delay = user.delay;
+        this.delayPoints = user.delayPoints;
 
         //borrar el user
         //añadir el nuevo librarian
@@ -40,9 +40,9 @@ public class Librarian : User
             Console.WriteLine("Please fill the form with the user data");
             return;
         }
-        if(user.blocked == true && user.delay == true)
+        if(user.blocked == true)
         {
-            Console.WriteLine("The user is blocked or still in a delay suspension period");
+            Console.WriteLine("The user is blocked");
             return;
         }
         if(user.suspended == false)

@@ -15,6 +15,7 @@ public class Loan
     public User? user {get; set;} = null;
     public bool penalized {get; set;} = false;
     public bool active {get; set;} = true;
+    public bool delayed {get; set;} = false;
 
     private Loan(){}// para EF Core
 
