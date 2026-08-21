@@ -18,7 +18,7 @@ public class ShowUserLoans
             TimeSpan daysLeft = l.expectedReturn - now;
             int days = daysLeft.Days;
 
-            Console.WriteLine($"Item: {l.id} {l.item.title} Media: {l.item.media}" + 
+            Console.WriteLine($"Item: {l.item.id} {l.item.title} Media: {l.item.media}" + 
                 $" Expected return: {l.expectedReturn!.ToString("dd/MM/yyyy")} Days left: {days}");
         }
     }
