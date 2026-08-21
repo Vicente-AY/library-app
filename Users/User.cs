@@ -12,6 +12,7 @@ public class User
     public string password {get; set;} = "";
     public string address {get; set;} = "";
     public bool suspended {get; set;} = true; //every user is suspended at the begining
+    public DateTime? suspensionUntil {get; set;} = null;
     public bool blocked {get; set;} = false;
     public bool delay {get; set;} = false;
     public List<Loan> loanList {get; set;} = new List<Loan>();
@@ -48,6 +49,8 @@ public class User
         this.surnames = surnames;
         this.bDate = bDate;
         this.address = address;
+
+        this.suspended = false;
     }
 
     public void CheckData()

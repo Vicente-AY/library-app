@@ -13,6 +13,8 @@ public abstract class LibraryItem{
     public string title {get; set;} = "";
     public int year {get; set;} = 0;
     public Availability availability {get; set;} = Availability.Available;
+    public DateTime? maintenanceEntry {get; set;} = null;
+    public DateTime? mainteneanceExit {get; set;} = null;
     public string genre {get; set;} = "";
     public string imageRoute {get; set;} = "";
     public List<WaitList> waitList {get; set;} = new List<WaitList>();

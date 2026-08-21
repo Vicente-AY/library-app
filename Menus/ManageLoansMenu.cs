@@ -3,6 +3,7 @@ using ProgramExceptions;
 using Utils;
 using Loans;
 using Data;
+using Items;
 
 namespace Menus;
 
@@ -111,28 +112,44 @@ public class ManageLoansMenu
 
         foreach(var l in cancelLoans)
         {
+
+            CheckItemStatus(l.item, user);
+
             var item = l.item;
-            if(l.item.waitList.Count > 0)
+            if(l.item.waitList.Count > 0 && l.item.availability != Availability.Maintenance)
             {
                 item.waitList[0].user.notifications.Add($"{cancelationTime.ToString("dd/MM/yyyy : hh:mm")} - Available to pick up: {item.id} {item.title}");
                 item.waitList[0].notifiedAt = cancelationTime;
                 item.waitList[0].expirationDate = cancelationTime.AddDays(2);
             }
-            else
+            if(l.item.waitList.Count == 0 && l.item.availability != Availability.Maintenance)
             {
                 l.item.availability = Availability.Available;
             }
 
-            l.itemReturned = DateTime.Now;
+            l.itemReturned = cancelationTime;
 
             TimeSpan loanDuration = cancelationTime - l.loanCreated;
+            float duration = loanDuration.Days;
 
-            l.loanExtension = loanDuration.Days;
+            l.loanExtension = (int)Math.Round(duration);
             l.active = false;
 
             user.loanList.Remove(l);
         }
 
         db.SaveChanges();
+    }
+
+    private void CheckItemStatus(LibraryItem item, User user)
+    {
+        Random ran = new Random();
+
+        int rInt = ran.Next(1, 20);
+        if(rInt == 1)
+        {
+            item.availability = Availability.Maintenance;
+            user.suspended = true;
+        }
     }
 }

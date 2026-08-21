@@ -125,6 +125,7 @@ public class CreateLoan
     private WaitList WaitListCreation(User user, LibraryItem item)
     {
         DateTime waitListRequest = DateTime.Now;
-        return new WaitList(user, item, waitListRequest);
+        user.notifications.Add($"Successfully added to item ID: {item.id} Title: {item.title} waitlist");
+        return new WaitList(user, waitListRequest);
     }
 }
