@@ -12,6 +12,7 @@ public class User
     public string password {get; set;} = "";
     public string address {get; set;} = "";
     public bool suspended {get; set;} = true; //every user is suspended at the begining
+    public DateTime? suspensionStart {get; set;} = null;
     public DateTime? suspensionUntil {get; set;} = null;
     public bool blocked {get; set;} = false;
     public bool delay {get; set;} = false;

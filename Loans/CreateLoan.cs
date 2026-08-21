@@ -118,14 +118,14 @@ public class CreateLoan
 
         db.Loans.Add(loan);
         user.loanList.Add(loan);
-        user.notifications.Add($"{loanCreated.ToString("dd--MM-yyyy | HH:mm:ss")}. Successfuly loaned {item.title}");
+        user.notifications.Add($"{loanCreated.ToString("dd--MM-yyyy | HH:mm:ss")}. Successfuly loaned ID: {item.id} | {item.title}");
         item.availability = Availability.Lent;
     }
 
     private WaitList WaitListCreation(User user, LibraryItem item)
     {
         DateTime waitListRequest = DateTime.Now;
-        user.notifications.Add($"Successfully added to item ID: {item.id} Title: {item.title} waitlist");
+        user.notifications.Add($"{DateTime.Now.ToString("dd-MM-yyyy | HH:mm:ss")}. Successfully added item ID: {item.id} | {item.title} to waitlist");
         return new WaitList(user, waitListRequest);
     }
 }

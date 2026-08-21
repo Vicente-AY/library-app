@@ -149,7 +149,11 @@ public class ManageLoansMenu
         if(rInt == 1)
         {
             item.availability = Availability.Maintenance;
+            item.maintenanceEntry = DateTime.Now;
+            item.mainteneanceExit = DateTime.Now.AddDays(ran.Next(3, 15));
+
             user.suspended = true;
+            user.suspensionStart = DateTime.Now;
         }
     }
 }
