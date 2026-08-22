@@ -13,8 +13,8 @@ public class ManageLoansMenu
     int maxOption = 1000;
     public void OpenManageLoansMenu(User user)
     {
-        Console.WriteLine("\nWelcome to he Loan Management Menu");   
-        Console.WriteLine("------------------\n");
+        Console.WriteLine("\nWelcome to Loan Management Menu");   
+        Console.WriteLine("---------------------------------\n");
 
         if(user.loanList is null)
         {
@@ -28,16 +28,11 @@ public class ManageLoansMenu
 
         while(iterate){
             try{
-                Console.WriteLine("Please select an option (Type 0 or blank to close the menu)");
+                Console.WriteLine("Please select an option");
                 Console.WriteLine("1. Consult Loans | 2. Return Item/s | 3. Ask for loan extension");
+                Console.WriteLine("4. Exit");
 
                 input = Console.ReadLine();
-
-                if(string.IsNullOrWhiteSpace(input) || input.Equals("0"))
-                {
-                    Console.WriteLine("\nReturning to User Main Manu");
-                    return;
-                }
 
                 option = InputValidation.CheckInput(input, minOption, maxOption);
 
@@ -55,6 +50,9 @@ public class ManageLoansMenu
                         LoanExtension lExt = new LoanExtension();
                         lExt.ExtendLoan(user);
                         break;
+                    case 4:
+                        Console.WriteLine("\nReturning to User Main Manu");
+                        return;
                     default:
                         Console.WriteLine("\nUnrecogniced Option. Plese select a valid one");
                         break;

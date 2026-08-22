@@ -14,23 +14,17 @@ public class UserMenu
     {
 
         int maxOption = GetMaxOption(user);
-
-        if(string.IsNullOrWhiteSpace(user.name)){
-            Console.WriteLine($"\nWelcome {user.login}");
-        }
-        else
-        {
-            Console.WriteLine($"\nWelcome {user.name}");
-        }
-        
-        Console.WriteLine("------------------");
-
         bool iterate = true;
         string? input = "";
         int option = 0;
-
+        
+        string salute = string.IsNullOrWhiteSpace(user.name) ? $"\nWelcome to User's Menu {user.login}. (Account inacctive, talk to an employee)" 
+                        : $"\nWelcome to User's Menu {user.name}";
         while(iterate){
             try{
+                Console.WriteLine(salute);
+                Console.WriteLine("------------------");
+
                 Console.WriteLine("\nPlease select an option");
                 Console.WriteLine("1. Make a Loan | 2. Manage Loans | 3. ");
 
@@ -45,7 +39,8 @@ public class UserMenu
                         loanMenu.OpenLoanMenu(user);
                         break;
                     case 2:
-
+                        ManageLoansMenu manageLoans = new ManageLoansMenu();
+                        manageLoans.OpenManageLoansMenu(user);
                         break;
                     case 3:
                     
@@ -78,7 +73,7 @@ public class UserMenu
         return;
     }
 
-    public int GetMaxOption(User user)
+    private int GetMaxOption(User user)
     {
         return user is Librarian ? librarianMaxOption : userMaxOption;
     }

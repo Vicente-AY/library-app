@@ -13,7 +13,7 @@ public class LoanSelection
 
         if(string.IsNullOrWhiteSpace(input) || input.Equals("0"))
         {
-            Console.WriteLine("\nCancelling return operation");
+            Console.WriteLine("\nCancelling operation");
             return null;
         }
 
