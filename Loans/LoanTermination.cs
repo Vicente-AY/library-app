@@ -31,11 +31,11 @@ public class LoanTermination
 
             var item = l.item;
 
-            List<WaitList> cleanWaitList = CheckNextUser(l.item.waitList)!;
+            List<WaitEntry> cleanWaitList = CheckNextUser(l.item.waitList)!;
 
             if(cleanWaitList.Count > 0 && l.item.availability != Availability.Maintenance)
             {
-                WaitList nextWaitList = cleanWaitList[0];    
+                WaitEntry nextWaitList = cleanWaitList[0];    
 
                 User nextUser = nextWaitList.user;
                 NotificacionGenerator notGen = new NotificacionGenerator();
@@ -94,7 +94,7 @@ public class LoanTermination
         }
     }
 
-    private List<WaitList>? CheckNextUser(List<WaitList> waitList)
+    private List<WaitEntry>? CheckNextUser(List<WaitEntry> waitList)
     {
 
         NotificacionGenerator notGen = new NotificacionGenerator();
@@ -122,7 +122,7 @@ public class LoanTermination
 
         while(waitListChecked < totalItems)
         {
-            WaitList nextWait = waitList[0];
+            WaitEntry nextWait = waitList[0];
 
             bool longSuspension = nextWait.user.suspended && nextWait.user.suspensionUntil > availablePeriodEnd;
 

@@ -123,11 +123,11 @@ public class CreateLoan
         item.availability = Availability.Lent;
     }
 
-    private WaitList WaitListCreation(User user, LibraryItem item)
+    private WaitEntry WaitListCreation(User user, LibraryItem item)
     {
         DateTime waitListRequest = DateTime.Now;
         NotificacionGenerator notGen = new NotificacionGenerator();
         notGen.GenerateNotification(user, $"Successfully added item ID: {item.id} | {item.title} to waitlist");
-        return new WaitList(user, waitListRequest);
+        return new WaitEntry(user, waitListRequest);
     }
 }

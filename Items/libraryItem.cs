@@ -17,7 +17,7 @@ public abstract class LibraryItem{
     public DateTime? mainteneanceExit {get; set;} = null;
     public string genre {get; set;} = "";
     public string imageRoute {get; set;} = "";
-    public List<WaitList> waitList {get; set;} = new List<WaitList>();
+    public List<WaitEntry> waitList {get; set;} = new List<WaitEntry>();
     public bool lost {get; set;} = false;
 
     public LibraryItem(int id, string title, int year, string genre, string imageRoute)
