@@ -10,6 +10,7 @@ public class WaitList
     public DateTime? requestDate {get; set;} = null;
     public DateTime? notifiedAt {get; set;} = null;
     public DateTime? expirationDate {get; set;} = null;
+    public LibraryItem item {get; set;} = null!;
 
     private WaitList(){}// solo para EF Core
     public WaitList(User user, DateTime requestDate)

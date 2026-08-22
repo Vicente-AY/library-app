@@ -59,8 +59,11 @@ public class LoanExtension
             l.extended = true;
             l.expectedReturn = l.expectedReturn.AddDays(extension);
 
-            user.notifications.Add($"Item {l.item.title} loan extended successfully. New return date: {l.expectedReturn.ToString("dd/MM/yyyy")}");
+            NotificacionGenerator notGen = new NotificacionGenerator();
+            notGen.GenerateNotification(user, $"Item {l.item.title} loan extended successfully. New return date: {l.expectedReturn.ToString("dd/MM/yyyy")}");
             Console.WriteLine($"\nSuccessfull loan extension for {l.item.title}!");
         }
+
+        db.SaveChanges();
     }
 }

@@ -30,11 +30,19 @@ public class LoanTermination
             CheckLoanTimeSpanExceed(l, user);
 
             var item = l.item;
-            if(l.item.waitList.Count > 0 && l.item.availability != Availability.Maintenance)
+
+            List<WaitList> cleanWaitList = CheckNextUser(l.item.waitList)!;
+
+            if(cleanWaitList.Count > 0 && l.item.availability != Availability.Maintenance)
             {
-                item.waitList[0].user.notifications.Add($"{cancelationTime.ToString("dd/MM/yyyy : hh:mm")} - Available to pick up: {item.id} {item.title}");
-                item.waitList[0].notifiedAt = cancelationTime;
-                item.waitList[0].expirationDate = cancelationTime.AddDays(2);
+                WaitList nextWaitList = cleanWaitList[0];    
+
+                User nextUser = nextWaitList.user;
+                NotificacionGenerator notGen = new NotificacionGenerator();
+                notGen.GenerateNotification(nextUser, $"Available to pick up: ID: {item.id} - {item.title}");
+
+                nextWaitList.notifiedAt = cancelationTime;
+                nextWaitList.expirationDate = cancelationTime.AddDays(2);
             }
             if(l.item.waitList.Count == 0 && l.item.availability != Availability.Maintenance)
             {
@@ -84,5 +92,55 @@ public class LoanTermination
 
             user.delayPoints += days;
         }
+    }
+
+    private List<WaitList>? CheckNextUser(List<WaitList> waitList)
+    {
+
+        NotificacionGenerator notGen = new NotificacionGenerator();
+
+        if(waitList.Count == 0)
+        {
+            return waitList;
+        }
+
+        DateTime availablePeriodEnd = DateTime.Now.AddDays(2);
+
+        if (waitList.All(u => u.user.suspended && u.user.suspensionUntil > availablePeriodEnd))
+        {
+            foreach(var w in waitList.Where(u => u.user.suspended && u.user.suspensionUntil > availablePeriodEnd).ToList())
+            {
+                notGen.GenerateNotification(w.user, $"Your reserve for the Item: ID: {w.item.id} | {w.item.title} has been cancell due to your extended supension period");
+            }
+
+            waitList.Clear();
+            return waitList;
+        }
+
+        int waitListChecked = 0;
+        int totalItems = waitList.Count();
+
+        while(waitListChecked < totalItems)
+        {
+            WaitList nextWait = waitList[0];
+
+            bool longSuspension = nextWait.user.suspended && nextWait.user.suspensionUntil > availablePeriodEnd;
+
+            if (longSuspension)
+            {
+                waitList.RemoveAt(0);
+                waitList.Add(nextWait);
+
+                notGen.GenerateNotification(nextWait.user, $"Your reserve for the Item: ID: {nextWait.item.id} | {nextWait.item.title} has been moved due to your extended supension period");
+            
+                waitListChecked++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return waitList;
     }
 }

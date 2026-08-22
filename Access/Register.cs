@@ -2,6 +2,7 @@ using ProgramExceptions;
 using Utils;
 using Users;
 using Data;
+using System.Net.Mail;
 
 namespace Access;
 
@@ -32,7 +33,9 @@ public class Register
         int id = CreateId();
 
         User newUser = new User(id, login, pass);
-
+        NotificacionGenerator notGen = new NotificacionGenerator();
+        notGen.GenerateNotification(newUser, "Account Created! Welcome to Library App!");
+        
         db.Users.Add(newUser);
         db.SaveChanges();
         Console.WriteLine("User with login " + newUser.login + " added to the Library");
