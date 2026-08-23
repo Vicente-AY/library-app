@@ -26,7 +26,7 @@ public class UserMenu
                 Console.WriteLine("------------------");
 
                 Console.WriteLine("\nPlease select an option");
-                Console.WriteLine("1. Make a Loan | 2. Manage Loans | 3. ");
+                Console.WriteLine("1. Make a Loan | 2. Manage Loans | 3. Manage Reservations");
 
                 input = Console.ReadLine();
 
@@ -43,7 +43,8 @@ public class UserMenu
                         manageLoans.OpenManageLoansMenu(user);
                         break;
                     case 3:
-                    
+                        ManageWaitlistMenu manageWaitlist = new ManageWaitlistMenu();
+                        manageWaitlist.ShowWaitlistMenu(user);
                         break;
                     default:
                         break;

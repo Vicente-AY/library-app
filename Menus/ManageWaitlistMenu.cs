@@ -1,26 +1,30 @@
 using Users;
-using ProgramExceptions;
 using Utils;
-using Loans;
+using ProgramExceptions;
 using Data;
-using Items;
+using Loans;
+using Microsoft.EntityFrameworkCore;
 
 namespace Menus;
 
-public class ManageLoansMenu
+public class ManageWaitlistMenu
 {
     int minOption = 1;
-    int maxOption = 4;
-    public void OpenManageLoansMenu(User user)
+    int maxOption = 1000;
+
+    public void ShowWaitlistMenu(User user)
     {
 
-        if(user.loanList is null)
+        LibraryContext db = new LibraryContext();
+        List<WaitEntry> userWaitList = db.WaitLists.Include(i => i.item).Include(l => l.user).Where(w => w.user == user).ToList();
+
+        if(userWaitList is null)
         {
-            Console.WriteLine("You dont have any current Loans. Returning to User's Menu");
+            Console.WriteLine("\nSorry, you dont have any Item reservation. Returning to User's Menu");
             return;
         }
 
-        Console.WriteLine("\nWelcome to Loan Management Menu");   
+        Console.WriteLine("\nWelcome to Waitlist Management Menu");   
         Console.WriteLine("---------------------------------\n");
 
         bool iterate = true;
@@ -29,8 +33,8 @@ public class ManageLoansMenu
 
         while(iterate){
             try{
-                Console.WriteLine("Please select an option");
-                Console.WriteLine("1. Consult Loans | 2. Return Item/s | 3. Ask for loan extension");
+                Console.WriteLine("\nPlease select an option");
+                Console.WriteLine("1. Consult Reservations | 2. Cancel Reservations | 3. Pick up Reservation");
                 Console.WriteLine("4. Exit");
 
                 input = Console.ReadLine();
@@ -40,16 +44,13 @@ public class ManageLoansMenu
                 switch (option)
                 {
                     case 1: 
-                        ShowUserLoans userLoans = new ShowUserLoans();
-                        userLoans.ShowLoans(user);
+
                         break;
                     case 2:
-                        LoanTermination lTerm = new LoanTermination();
-                        lTerm.ReturnItems(user);
+
                         break;
                     case 3:
-                        LoanExtension lExt = new LoanExtension();
-                        lExt.ExtendLoan(user);
+
                         break;
                     case 4:
                         Console.WriteLine("\nReturning to User Main Manu");
