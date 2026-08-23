@@ -13,7 +13,7 @@ public class Loan
     public int loanExtension {get; set;} = 0; //loan time in days
     public bool extended {get; set;} = false;
     public User? user {get; set;} = null;
-    public bool penalized {get; set;} = false;
+    public bool brokenReturn {get; set;} = false;
     public bool active {get; set;} = true;
     public bool delayed {get; set;} = false;
 

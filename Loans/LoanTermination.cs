@@ -26,23 +26,23 @@ public class LoanTermination
         foreach(var l in cancelLoans)
         {
 
-            CheckItemStatus(l.item, user);
+            CheckItemStatus(l, l.item, user);
             CheckLoanTimeSpanExceed(l, user);
 
-            var item = l.item;
+            LibraryItem item = l.item;
 
-            List<WaitEntry> cleanWaitList = CheckNextUser(l.item.waitList)!;
+            List<WaitEntry> cleanWaitList = CheckNextUser(item.waitList)!;
 
-            if(cleanWaitList.Count > 0 && l.item.availability != Availability.Maintenance)
+            if(cleanWaitList.Count > 0 && item.availability != Availability.Maintenance)
             {
-                WaitEntry nextWaitList = cleanWaitList[0];    
+                WaitEntry next = cleanWaitList[0];    
 
-                User nextUser = nextWaitList.user;
+                User nextUser = next.user;
                 NotificacionGenerator notGen = new NotificacionGenerator();
-                notGen.GenerateNotification(nextUser, $"Available to pick up: ID: {item.id} - {item.title}");
+                notGen.GenerateNotification(nextUser, $"Available to pick up: ID: {item.id} - {item.title}. The reserve lasts until {cancelationTime.AddDays(2).ToString("dd/MM/yyyy")}");
 
-                nextWaitList.notifiedAt = cancelationTime;
-                nextWaitList.expirationDate = cancelationTime.AddDays(2);
+                next.notifiedAt = cancelationTime;
+                next.expirationDate = cancelationTime.AddDays(2);
             }
             if(l.item.waitList.Count == 0 && l.item.availability != Availability.Maintenance)
             {
@@ -63,7 +63,7 @@ public class LoanTermination
         db.SaveChanges();
     }
 
-    private void CheckItemStatus(LibraryItem item, User user)
+    private void CheckItemStatus(Loan loan, LibraryItem item, User user)
     {
         Random ran = new Random();
 
@@ -73,6 +73,8 @@ public class LoanTermination
             item.availability = Availability.Maintenance;
             item.maintenanceEntry = DateTime.Now;
             item.mainteneanceExit = DateTime.Now.AddDays(ran.Next(3, 15));
+            
+            loan.brokenReturn = true;
 
             user.suspended = true;
             user.suspensionStart = DateTime.Now;
@@ -87,7 +89,6 @@ public class LoanTermination
             TimeSpan duration = now - loan.expectedReturn;
             double totalDays = duration.TotalDays;
             int days = (int) Math.Round(totalDays);
-            loan.penalized = true;
             loan.delayed = true;
 
             user.delayPoints += days;
@@ -131,7 +132,7 @@ public class LoanTermination
                 waitList.RemoveAt(0);
                 waitList.Add(nextWait);
 
-                notGen.GenerateNotification(nextWait.user, $"Your reserve for the Item: ID: {nextWait.item.id} | {nextWait.item.title} has been moved due to your extended supension period");
+                notGen.GenerateNotification(nextWait.user, $"Your reserve for the Item: ID: {nextWait.item.id} | {nextWait.item.title} has been modified due to your extended supension period");
             
                 waitListChecked++;
             }
