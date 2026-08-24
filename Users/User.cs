@@ -18,6 +18,7 @@ public class User
     public int delayPoints {get; set;} = 0;
     public List<Loan> loanList {get; set;} = new List<Loan>();
     public List<string> notifications {get; set;} = new List<string>();
+    public List<WaitEntry> userWaitList {get; set;} = new List<WaitEntry>();
 
     public User(int id, string login, string password)
     {

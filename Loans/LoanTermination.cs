@@ -31,7 +31,7 @@ public class LoanTermination
 
             LibraryItem item = l.item;
 
-            List<WaitEntry> cleanWaitList = CheckNextUser(item.waitList)!;
+            List<WaitEntry> cleanWaitList = CheckNextUser(item)!;
 
             if(cleanWaitList.Count > 0 && item.availability != Availability.Maintenance)
             {
@@ -95,8 +95,10 @@ public class LoanTermination
         }
     }
 
-    private List<WaitEntry>? CheckNextUser(List<WaitEntry> waitList)
+    private List<WaitEntry>? CheckNextUser(LibraryItem item)
     {
+
+        List<WaitEntry> waitList = item.waitList; 
 
         NotificacionGenerator notGen = new NotificacionGenerator();
 
@@ -109,8 +111,19 @@ public class LoanTermination
 
         if (waitList.All(u => u.user.suspended && u.user.suspensionUntil > availablePeriodEnd))
         {
-            foreach(var w in waitList.Where(u => u.user.suspended && u.user.suspensionUntil > availablePeriodEnd).ToList())
+
+            List<WaitEntry> cancelEntries = waitList.Where(w => w.user.suspended && w.user.suspensionUntil > availablePeriodEnd).ToList();
+
+            foreach(var w in cancelEntries)
             {
+
+                WaitEntry? userEntry = w.user.userWaitList.FirstOrDefault(e => e.item.id == item.id); 
+
+                if(userEntry != null)
+                {
+                    w.user.userWaitList.Remove(userEntry);
+                }
+
                 notGen.GenerateNotification(w.user, $"Your reserve for the Item: ID: {w.item.id} | {w.item.title} has been cancell due to your extended supension period");
             }
 

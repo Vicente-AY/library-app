@@ -67,7 +67,9 @@ public class CreateLoan
                     return;
                 }
 
-                item.waitList.Add(WaitListCreation(user, item));
+                WaitEntry newWEntry = WaitListCreation(user, item);
+                item.waitList.Add(newWEntry);
+                user.userWaitList.Add(newWEntry);
                 db.SaveChanges();
             }
             else

@@ -18,6 +18,7 @@ public class LoginVerifier
         using(LibraryContext db = new LibraryContext())
         {
             return db.Users.Include(u => u.notifications)
+                .Include(w => w.userWaitList).ThenInclude(i => i.item)
                 .Include(l => l.loanList).ThenInclude(i => i.item)
                 .ThenInclude(w => w.waitList).ThenInclude(u => u.user)
                 .FirstOrDefault(u => u.login == login);
