@@ -50,7 +50,8 @@ public class ManageWaitlistMenu
                         resCan.CancelReservation(user);
                         break;
                     case 3:
-
+                        ReservationPickUp resPick = new ReservationPickUp();
+                        resPick.PickUpReservation(user);
                         break;
                     case 4:
                         Console.WriteLine("\nReturning to User Main Manu");

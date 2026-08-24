@@ -15,6 +15,7 @@ public class CreateLoan
 
         SelectItems itemSelection = new SelectItems();
         List<LibraryItem>? selectedItems = itemSelection.ItemSelection(user);
+        LoanWaitlistBuilder waitlistLoanBuilder = new LoanWaitlistBuilder();
 
         if(selectedItems is null)
         {
@@ -35,13 +36,13 @@ public class CreateLoan
         foreach(var sItem in selectedItems)
         {
             if(sItem.availability == Availability.Available){
-                LoanCreation(user, sItem, db);
+                waitlistLoanBuilder.LoanCreation(user, sItem, db);
             }
             else
             {
                 if (!sItem.waitList.Any(w => w.user == user))
                 {
-                    sItem.waitList.Add(WaitListCreation(user, sItem));
+                    sItem.waitList.Add(waitlistLoanBuilder.WaitListCreation(user, sItem));
                 }
             }
         }
@@ -53,6 +54,7 @@ public class CreateLoan
     {
         
         LibraryContext db = new LibraryContext();
+        LoanWaitlistBuilder waitlistLoanBuilder = new LoanWaitlistBuilder();
 
         Console.WriteLine($"\nSelected Item: {item.id} | {item.title}");
 
@@ -68,7 +70,7 @@ public class CreateLoan
                     return;
                 }
 
-                WaitEntry newWEntry = WaitListCreation(user, item);
+                WaitEntry newWEntry = waitlistLoanBuilder.WaitListCreation(user, item);
                 item.waitList.Add(newWEntry);
                 user.userWaitList.Add(newWEntry);
                 db.SaveChanges();
@@ -101,36 +103,11 @@ public class CreateLoan
                 return;
             }
 
-            LoanCreation(user, item, db);
+            waitlistLoanBuilder.LoanCreation(user, item, db);
         }
 
         db.SaveChanges();
     }
 
-    private void LoanCreation(User user, LibraryItem item, LibraryContext db)
-    {
 
-        int id = 0;
-        DateTime loanCreated = DateTime.Now;
-        int days = (item is Book) ? 15 : 7;
-        DateTime expectedReturn = loanCreated.AddDays(days);
-
-        id = (db.Loans.Select(i => (int?)i.id).Max() ?? 0) + 1 ;
-
-        Loan loan = new Loan(id, item, loanCreated, expectedReturn, user);
-
-        db.Loans.Add(loan);
-        user.loanList.Add(loan);
-        NotificacionGenerator notGen = new NotificacionGenerator();
-        notGen.GenerateNotification(user, $"Successfuly loaned ID: {item.id} | {item.title}. Return Date: {expectedReturn.ToString("dd/MM/yyyy")}");
-        item.availability = Availability.Lent;
-    }
-
-    private WaitEntry WaitListCreation(User user, LibraryItem item)
-    {
-        DateTime waitListRequest = DateTime.Now;
-        NotificacionGenerator notGen = new NotificacionGenerator();
-        notGen.GenerateNotification(user, $"Successfully added item ID: {item.id} | {item.title} to waitlist");
-        return new WaitEntry(user, waitListRequest);
-    }
 }

@@ -10,7 +10,9 @@ public class WaitEntry
     public DateTime? requestDate {get; set;} = null;
     public DateTime? notifiedAt {get; set;} = null;
     public DateTime? expirationDate {get; set;} = null;
+    public DateTime? pickUpDate {get; set;} = null;
     public LibraryItem item {get; set;} = null!;
+    public bool active {get; set;} = true;
 
     private WaitEntry(){}// solo para EF Core
     public WaitEntry(User user, DateTime requestDate)
