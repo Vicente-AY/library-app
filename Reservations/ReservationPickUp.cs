@@ -73,6 +73,8 @@ public class ReservationPickUp
             user.userWaitList.Remove(w);
             item.waitList.Remove(w);
 
+            w.active = false;
+
             orderWaitList.CheckNextUser(item);
         }
     }
