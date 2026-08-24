@@ -1,7 +1,7 @@
 using Users;
 using Items;
 
-namespace Loans;
+namespace Reservations;
 
 public class WaitEntry
 {
