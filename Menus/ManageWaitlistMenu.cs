@@ -46,7 +46,8 @@ public class ManageWaitlistMenu
                         ShowReservations(user);
                         break;
                     case 2:
-                        CancelReservation(user);
+                        ReservationCancelation resCan = new ReservationCancelation();
+                        resCan.CancelReservation(user);
                         break;
                     case 3:
 
@@ -105,10 +106,5 @@ public class ManageWaitlistMenu
 
             Console.WriteLine($"Item: {item.id} {item.title}" + text);
         }
-    }
-
-    private void CancelReservation(User user)
-    {
-        
     }
 }
