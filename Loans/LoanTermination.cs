@@ -15,7 +15,7 @@ public class LoanTermination
         DateTime cancelationTime = DateTime.Now;
 
         LoanSelection selectLoans = new LoanSelection();
-        Console.WriteLine("\nPlease, insert the ids for the items you want to return by a comma, or just the id if is just one item");
+        Console.WriteLine("\nPlease, insert the ids for the items you want to return separated by a comma, or just the id if is just one item");
         List<Loan>? cancelLoans = selectLoans.SelectLoans(user);
 
         if(cancelLoans is null)

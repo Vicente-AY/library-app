@@ -45,7 +45,7 @@ public class ManageWaitlistMenu
                         ShowReservations(user);
                         break;
                     case 2:
-                        CancellReservation(user);
+                        CancelReservation(user);
                         break;
                     case 3:
 
@@ -86,7 +86,6 @@ public class ManageWaitlistMenu
     private void ShowReservations(User user)
     {
         List<WaitEntry> userWaitL = user.userWaitList;
-        List<WaitEntry> intemWaitL = user.userWaitList[0].item.waitList;
         string? text = "";
 
         Console.WriteLine("Your Reserve List");
@@ -105,5 +104,10 @@ public class ManageWaitlistMenu
 
             Console.WriteLine($"Item: {item.id} {item.title}" + text);
         }
+    }
+
+    private void CancelReservation(User user)
+    {
+        
     }
 }
