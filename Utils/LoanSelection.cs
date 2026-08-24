@@ -8,17 +8,12 @@ public class LoanSelection
     public List<Loan>? SelectLoans(User user)
     {
         
-        Console.WriteLine("Type 0 or blank to cancell the operation");
-        string? input = Console.ReadLine();
+        List<int>? itemsIds = IdItemSelection.ItemIdSelection();
 
-        if(string.IsNullOrWhiteSpace(input) || input.Equals("0"))
+        if(itemsIds is null)
         {
-            Console.WriteLine("\nCancelling operation");
             return null;
         }
-
-        List<string> inputString = input.Split(',').Select(s => s.Trim()).ToList();
-        List<int> itemsIds = StringToIntConvertor.ConvertStringToInt(inputString).Distinct().ToList();
 
         var loans = user.loanList.Where(i => i.active && itemsIds.Contains(i.item.id)).ToList();
 

@@ -4,28 +4,26 @@ using ProgramExceptions;
 using Data;
 using Loans;
 using Microsoft.EntityFrameworkCore;
+using Items;
 
 namespace Menus;
 
 public class ManageWaitlistMenu
 {
     int minOption = 1;
-    int maxOption = 1000;
+    int maxOption = 4;
 
     public void ShowWaitlistMenu(User user)
     {
 
-        LibraryContext db = new LibraryContext();
-        List<WaitEntry> userWaitList = db.WaitLists.Include(i => i.item).Include(l => l.user).Where(w => w.user == user).ToList();
-
-        if(userWaitList is null)
+        if(user.userWaitList is null)
         {
             Console.WriteLine("\nSorry, you dont have any Item reservation. Returning to User's Menu");
             return;
         }
 
-        Console.WriteLine("\nWelcome to Waitlist Management Menu");   
-        Console.WriteLine("---------------------------------\n");
+        Console.WriteLine("\nWelcome to Reservation Management Menu");   
+        Console.WriteLine("----------------------------------------\n");
 
         bool iterate = true;
         string? input = "";
@@ -33,7 +31,7 @@ public class ManageWaitlistMenu
 
         while(iterate){
             try{
-                Console.WriteLine("\nPlease select an option");
+                Console.WriteLine("Please select an option");
                 Console.WriteLine("1. Consult Reservations | 2. Cancel Reservations | 3. Pick up Reservation");
                 Console.WriteLine("4. Exit");
 
@@ -44,16 +42,17 @@ public class ManageWaitlistMenu
                 switch (option)
                 {
                     case 1: 
-
+                        ShowReservations(user);
                         break;
                     case 2:
-
+                        CancellReservation(user);
                         break;
                     case 3:
 
                         break;
                     case 4:
                         Console.WriteLine("\nReturning to User Main Manu");
+                        iterate = false;
                         return;
                     default:
                         Console.WriteLine("\nUnrecogniced Option. Plese select a valid one");
@@ -82,5 +81,29 @@ public class ManageWaitlistMenu
             }
         }
         return;
+    }
+
+    private void ShowReservations(User user)
+    {
+        List<WaitEntry> userWaitL = user.userWaitList;
+        List<WaitEntry> intemWaitL = user.userWaitList[0].item.waitList;
+        string? text = "";
+
+        Console.WriteLine("Your Reserve List");
+
+        foreach(var w in userWaitL)
+        {
+            LibraryItem item = w.item;
+            int position = item.waitList.FindIndex(a => a.user == user) + 1;
+
+            if(position == 0)
+            {
+                continue;
+            }
+
+            text = w.notifiedAt is null ? $" position in the waitlist: {position}": $" is ready for pick up";
+
+            Console.WriteLine($"Item: {item.id} {item.title}" + text);
+        }
     }
 }
