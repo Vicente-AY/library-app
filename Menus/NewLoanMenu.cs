@@ -53,7 +53,6 @@ public class NewLoanMenu
                 {
                     case 1: 
                         ShowAllItems(user, items);
-                        iterate = false;
                         break;
                     case 2:
                         MediaSelectionMenu mediaMenu = new MediaSelectionMenu();
@@ -61,7 +60,6 @@ public class NewLoanMenu
                         if(selectedType != null)
                         {
                             ShowItems(user, items, selectedType);
-                            iterate = false;
                         }
                         break;
                     case 3:

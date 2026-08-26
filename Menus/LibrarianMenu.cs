@@ -21,7 +21,7 @@ public class LibrarianMenu
         while(iterate){
             try{
                 Console.WriteLine("\nPlease select an option");
-                Console.WriteLine("1. Login | 2. Register | 3. Exit");
+                Console.WriteLine("1. Manage Users | 2. Manage Items | 3. Exit");
 
                 input = Console.ReadLine();
 
@@ -29,8 +29,9 @@ public class LibrarianMenu
 
                 switch (option)
                 {
-                    case 1: 
-
+                    case 1:
+                        ManageUsersMenu mUsersMenu = new ManageUsersMenu();
+                        mUsersMenu.ShowManageUsersMenu();
                         break;
                     case 2:
 
