@@ -7,7 +7,6 @@ public class ShowUserData
 {
     public static void ShowUsers(List<User> selectedUsers)
     {
-        LibraryContext db = new LibraryContext();
 
         List<User> users = selectedUsers.Where(u => !(u is Librarian) && u.name != null).ToList();
         List<Librarian> librarians = selectedUsers.OfType<Librarian>().ToList();
