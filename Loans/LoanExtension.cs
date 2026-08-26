@@ -45,7 +45,7 @@ public class LoanExtension
             }
 
             DateTime now = DateTime.Now;
-            TimeSpan duration = now - l.expectedReturn;
+            TimeSpan duration = l.expectedReturn - now;
             double totalDays = duration.TotalDays;
             
             if(totalDays <= 0 || totalDays >= 2)

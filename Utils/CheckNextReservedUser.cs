@@ -59,7 +59,7 @@ public class CheckNextReservedUser
                 notGen.GenerateNotification(nextWait.user, $"Your reserve for the Item: ID: {nextWait.item.id} | {nextWait.item.title} has been modified due to your extended supension period");
 
                 nextWait.notifiedAt = DateTime.Now;
-                nextWait.notifiedAt = DateTime.Now.AddDays(2);            
+                nextWait.expirationDate = DateTime.Now.AddDays(2);            
 
                 waitListChecked++;
             }
