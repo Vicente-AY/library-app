@@ -14,6 +14,7 @@ public class Loan
     public bool extended {get; set;} = false;
     public User? user {get; set;} = null;
     public bool brokenReturn {get; set;} = false;
+    public bool finePaid {get; set;} = false;
     public bool active {get; set;} = true;
     public bool delayed {get; set;} = false;
 

@@ -77,9 +77,11 @@ public class LoanTermination
             item.mainteneanceExit = DateTime.Now.AddDays(ran.Next(3, 15));
             
             loan.brokenReturn = true;
+            loan.finePaid = false;
 
             user.suspended = true;
             user.suspensionStart = DateTime.Now;
+            user.suspensionUntil = DateTime.MaxValue;
         }
     }
 
