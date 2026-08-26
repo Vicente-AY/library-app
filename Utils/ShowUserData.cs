@@ -9,7 +9,7 @@ public class ShowUserData
     {
         LibraryContext db = new LibraryContext();
 
-        List<User> users = selectedUsers.Where(u => !(u is Librarian) && u.name != null && u.blocked != true).ToList();
+        List<User> users = selectedUsers.Where(u => !(u is Librarian) && u.name != null).ToList();
         List<Librarian> librarians = selectedUsers.OfType<Librarian>().ToList();
 
         foreach(var u in users)
