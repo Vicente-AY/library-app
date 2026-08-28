@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5TuVa3sEQi4=",
+  "dgSpecHash": "d8Iu6Bics8E=",
   "success": true,
   "projectFilePath": "C:\\Users\\Vicente\\Documents\\library-app\\library-app.csproj",
   "expectedPackageFiles": [
@@ -37,7 +37,6 @@
     "C:\\Users\\Vicente\\.nuget\\packages\\sqlitepclraw.core\\2.1.12\\sqlitepclraw.core.2.1.12.nupkg.sha512",
     "C:\\Users\\Vicente\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.12\\sqlitepclraw.lib.e_sqlite3.2.1.12.nupkg.sha512",
     "C:\\Users\\Vicente\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.12\\sqlitepclraw.provider.e_sqlite3.2.1.12.nupkg.sha512",
-    "C:\\Users\\Vicente\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\Vicente\\.nuget\\packages\\system.composition\\9.0.0\\system.composition.9.0.0.nupkg.sha512",
     "C:\\Users\\Vicente\\.nuget\\packages\\system.composition.attributedmodel\\9.0.0\\system.composition.attributedmodel.9.0.0.nupkg.sha512",
     "C:\\Users\\Vicente\\.nuget\\packages\\system.composition.convention\\9.0.0\\system.composition.convention.9.0.0.nupkg.sha512",
