@@ -3,7 +3,7 @@ namespace Users;
 public class Librarian : User
 {
 
-    public Librarian(User user) : base(user.id, user.login, user.password)
+    public Librarian(User user) : base(user.login, user.password)
     {
 
         if(user.name == "" && user.surnames == "" && user.address == "" && user.bDate == null)

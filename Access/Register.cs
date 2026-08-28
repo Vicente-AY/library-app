@@ -30,9 +30,7 @@ public class Register
             return;
         }
 
-        int id = CreateId();
-
-        User newUser = new User(id, login, pass);
+        User newUser = new User(login, pass);
         NotificacionGenerator notGen = new NotificacionGenerator();
         notGen.GenerateNotification(newUser, "Account Created! Welcome to Library App!");
         
@@ -119,6 +117,7 @@ public class Register
         }
     }
     
+    /*
     public int CreateId()
     {
         
@@ -135,5 +134,6 @@ public class Register
 
         return newId + 1;
     }
+    */
     
 }

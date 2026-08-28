@@ -5,43 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:library_app.GUI.Login"
         mc:Ignorable="d"
-        Title="Register" Height="450" Width="800">
+        Title="Register" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    
     <Grid>
         <StackPanel>
-            <TextBlock Text="Login" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-
-            <TextBlock Text="User" FontSize="18" HorizontalAlignment="Center"/>
-            <TextBox x:Name="txtUser" Padding="3" Margin="0,0,0,20" Width="150"/>
-
-            <TextBlock Text="Password" FontSize="18" HorizontalAlignment="Center"/>
-            <TextBox x:Name="txtPass" Padding="3" Margin="0,0,0,20" Width="150"/>
-
-            <Button x:Name="btnRegister" Content="Register" Click="BtnRegister_Click" Height="30" Width="100" Margin="0,0,0,20"/>
-            <Button x:Name="btnLogin" Content="Login" Click="BtnLogin_Click" Height="30" Width="100" Margin="0,0,0,20"
-                    
-        <Window x:Class="library_app.GUI.Login.Register"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:library_app.GUI.Login"
-        mc:Ignorable="d"
-        Title="Register" Height="450" Width="800">
-    <Grid>
-        <StackPanel>
+            
             <TextBlock Text="Register" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
             <TextBlock Text="User" FontSize="18" HorizontalAlignment="Center"/>
             <TextBox x:Name="txtUser" Padding="3" Margin="0,0,0,20" Width="150"/>
 
             <TextBlock Text="Password" FontSize="18" HorizontalAlignment="Center"/>
-            <TextBox x:Name="txtPass" Padding="3" Margin="0,0,0,20" Width="150"/>
+            <PasswordBox x:Name="txtPass" Padding="3" Margin="0,0,0,20" Width="150"/>
+
+            <TextBlock Text="Repeat Password" FontSize="18" HorizontalAlignment="Center"/>
+            <PasswordBox x:Name="txtPass2" Padding="3" Margin="0,0,0,20" Width="150"/>
 
             <Button x:Name="btnRegister" Content="Register" Click="BtnRegister_Click" Height="30" Width="100" Margin="0,0,0,20"/>
             <Button x:Name="btnLogin" Content="Login" Click="BtnLogin_Click" Height="30" Width="100" Margin="0,0,0,20"/>
 
         </StackPanel>
-    </Grid>
-</Window>
     </Grid>
 </Window>

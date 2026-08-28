@@ -21,9 +21,8 @@ public class User
     public List<string> notifications {get; set;} = new List<string>();
     public List<WaitEntry> userWaitList {get; set;} = new List<WaitEntry>();
 
-    public User(int id, string login, string password)
+    public User(string login, string password)
     {
-        this.id = id;
         this.login = login;
         this.password = password;
     }
