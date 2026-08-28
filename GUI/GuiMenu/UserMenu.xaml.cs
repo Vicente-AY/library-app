@@ -10,14 +10,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace library_app
+namespace library_app.GUI.GuiMenu
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserMenu : Window
     {
-        public MainWindow()
+        public UserMenu()
         {
             InitializeComponent();
         }
