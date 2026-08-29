@@ -36,7 +36,7 @@ namespace library_app.GUI.Login
                 if (string.IsNullOrWhiteSpace(login)){
                     MessageBox.Show("Please, introduce a Username");
                 }
-                if(string.IsNullOrWhiteSpace(pass))
+                else if(string.IsNullOrWhiteSpace(pass))
                 {
                     MessageBox.Show("Please, introduce a Password");
                 }

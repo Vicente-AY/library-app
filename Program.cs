@@ -22,7 +22,7 @@ public class Program{
 
         var app = new Application
         {
-            ShutdownMode = ShutdownMode.OnExplicitShutdown
+            ShutdownMode = ShutdownMode.OnLastWindowClose
         };
 
         MainWindow main = new MainWindow();
