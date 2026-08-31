@@ -8,6 +8,7 @@
         Title="UserMenu" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock Text="Holiwi UwU" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="85"/>
+        <TextBlock Text="Holiwi UwU" HorizontalAlignment="Center" FontSize="85"/>
+        <Button x:Name="btnSearch" Click="BtnSearch_Click"  Content="Search for an Item" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

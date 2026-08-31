@@ -18,5 +18,10 @@ namespace library_app.GUI.GuiMenu
         {
             InitializeComponent();
         }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs f)
+        {
+            MessageBox.Show("uWu");
+        }
     }
 }
