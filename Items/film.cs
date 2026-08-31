@@ -11,10 +11,10 @@ public class Film : LibraryItem
     public List<string> versionLanguages {get; set;} = new List<string>();
     public string format {get; set;} = ""; //VHS, DVD
 
-    public override string creator => this.director;
+    public override string creator => string.Join(", ", director);
 
-    public Film(int id, string title, int year, string genre, string imageRoute, List<string> director, string screenWriter, int duration,
-                string productionCompany, List<string> versionLanguages, string format) : base(id, title, year, genre, imageRoute)
+    public Film(int id, string title, string media, int year, string genre, string imageRoute, List<string> director, string screenWriter, int duration,
+                string productionCompany, List<string> versionLanguages, string format) : base(id, title, media, year, genre, imageRoute)
     {
         this.director = director;
         this.screenWriter = screenWriter;

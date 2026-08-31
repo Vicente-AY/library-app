@@ -2,6 +2,7 @@ using Data;
 using Items;
 using library_app.GUI.Login;
 using Menus;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Windows;
 using Users;
@@ -14,6 +15,7 @@ public class Program{
         using (var db = new LibraryContext())
         {
             db.Database.EnsureCreated();
+            var i = db.LibraryItems.ToList();
         }
         /*
         MainMenu mm = new MainMenu();

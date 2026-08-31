@@ -12,8 +12,8 @@ public class MusicAlbum : LibraryItem
 
     public override string creator => this.band;
 
-    public MusicAlbum(int id, string title, int year, string genre, string imageRoute, string band, List<string> listOfSongs,
-                    int duration, string recordingStudio, string label) : base(id, title, year, genre, imageRoute){
+    public MusicAlbum(int id, string title, string media, int year, string genre, string imageRoute, string band, List<string> listOfSongs,
+                    int duration, string recordingStudio, string label) : base(id, title, media, year, genre, imageRoute){
 
         this.band = band;
         this.listOfSongs = listOfSongs;

@@ -23,10 +23,11 @@ public abstract class LibraryItem{
 
 
     public virtual string creator => "";
-    public LibraryItem(int id, string title, int year, string genre, string imageRoute)
+    public LibraryItem(int id, string title, string media, int year, string genre, string imageRoute)
     {
         this.id = id;
         this.title = title;
+        this.media = media;
         this.year = year;
         this. genre = genre;
         this.imageRoute = imageRoute;

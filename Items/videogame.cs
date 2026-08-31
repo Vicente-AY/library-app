@@ -12,8 +12,8 @@ public class Videogame : LibraryItem
 
     public override string creator => this.developer;
 
-    public Videogame(int id, string title, int year, string genre, string imageRoute, string developer, string publisher, string platform, 
-                    string engine, List<string> versionLanguages) : base(id, title, year, genre, imageRoute)
+    public Videogame(int id, string title, string media, int year, string genre, string imageRoute, string developer, string publisher, string platform, 
+                    string engine, List<string> versionLanguages) : base(id, title, media, year, genre, imageRoute)
     {
         this.developer = developer;
         this.publisher = publisher;

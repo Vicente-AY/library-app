@@ -1,4 +1,5 @@
-﻿using System;
+﻿using library_app.GUI.Loans;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,7 +22,10 @@ namespace library_app.GUI.GuiMenu
 
         private void BtnSearch_Click(object sender, RoutedEventArgs f)
         {
-            MessageBox.Show("uWu");
+            LoanWindow lWindow = new LoanWindow();
+            lWindow.Show();
+
+            this.Close();
         }
     }
 }

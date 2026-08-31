@@ -1,3 +1,4 @@
+using System.IO;
 using Utils;
 
 namespace Items;
@@ -11,11 +12,11 @@ public class Book : LibraryItem
     public string originalLanguage {get; set;} = "";
     public string versionLanguage {get; set;} = "";
 
-    public override string creator => this.author;
+    public override string creator => string.Join(", ", author);
 
-    public Book(int id, string title, int year, string genre, string imageRoute, int pages,
+    public Book(int id, string title, string media, int year, string genre, string imageRoute, int pages,
                 List<string> author, string isbn, string editorial, string originalLanguage, string versionLanguage) : base(id, 
-                title, year, genre, imageRoute)
+                title, media, year, genre, imageRoute)
     {
         this.pages = pages;
         this.author = author;

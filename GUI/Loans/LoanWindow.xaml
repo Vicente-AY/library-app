@@ -9,6 +9,7 @@
     
     <Window.Resources>
         <local:BoolToCardBackgroundConverter x:Key="BoolToCardBackgroundConverter"/>
+        <local:RelativePathToImageConverter x:Key="RelativePathToImageConverter"/>
     </Window.Resources>
 
     <Grid Margin="10">
@@ -43,7 +44,7 @@
 
         <!--Panel de Tarjetas-->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="Items">
+            <ItemsControl x:Name="icItems">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>
@@ -57,12 +58,12 @@
                             Margin="8" Padding="10" Width="160" Background="{Binding Selected, Converter={StaticResource BoolToCardBackgroundConverter}}">
 
                             <StackPanel>
-                                <Image Source="{Binding item.imagePath}"
+                                <Image Source="{Binding item.imageRoute, Converter={StaticResource RelativePathToImageConverter}}"
                                        Height="140" Stretch="Uniform"/>
                                 <TextBlock Text="{Binding item.title}"
                                            FontWeight="Bold" TextWrapping="Wrap"
                                            Margin="0,6,0,2"/>
-                                <TextBlock Text="{Binding item.Creator}"
+                                <TextBlock Text="{Binding item.creator}"
                                            Foreground="Gray" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding item.availability}"
                                            TextWrapping="Wrap" Margin="0,6,0,2"/>
