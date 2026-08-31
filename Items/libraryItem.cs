@@ -21,6 +21,8 @@ public abstract class LibraryItem{
     public List<WaitEntry> waitList {get; set;} = new List<WaitEntry>();
     public bool lost {get; set;} = false;
 
+
+    public virtual string creator => "";
     public LibraryItem(int id, string title, int year, string genre, string imageRoute)
     {
         this.id = id;

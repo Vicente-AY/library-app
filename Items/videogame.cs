@@ -10,6 +10,8 @@ public class Videogame : LibraryItem
     public string engine {get; set;} = "";
     public List<string> versionLanguages {get; set;} = new List<string>();
 
+    public override string creator => this.developer;
+
     public Videogame(int id, string title, int year, string genre, string imageRoute, string developer, string publisher, string platform, 
                     string engine, List<string> versionLanguages) : base(id, title, year, genre, imageRoute)
     {

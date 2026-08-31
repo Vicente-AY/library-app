@@ -11,6 +11,8 @@ public class Book : LibraryItem
     public string originalLanguage {get; set;} = "";
     public string versionLanguage {get; set;} = "";
 
+    public override string creator => this.author;
+
     public Book(int id, string title, int year, string genre, string imageRoute, int pages,
                 List<string> author, string isbn, string editorial, string originalLanguage, string versionLanguage) : base(id, 
                 title, year, genre, imageRoute)

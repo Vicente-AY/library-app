@@ -11,6 +11,8 @@ public class Film : LibraryItem
     public List<string> versionLanguages {get; set;} = new List<string>();
     public string format {get; set;} = ""; //VHS, DVD
 
+    public override string creator => this.director;
+
     public Film(int id, string title, int year, string genre, string imageRoute, List<string> director, string screenWriter, int duration,
                 string productionCompany, List<string> versionLanguages, string format) : base(id, title, year, genre, imageRoute)
     {

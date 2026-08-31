@@ -10,6 +10,8 @@ public class MusicAlbum : LibraryItem
     public string recordingStudio {get; set;} = "";
     public string label {get; set;} = "";
 
+    public override string creator => this.band;
+
     public MusicAlbum(int id, string title, int year, string genre, string imageRoute, string band, List<string> listOfSongs,
                     int duration, string recordingStudio, string label) : base(id, title, year, genre, imageRoute){
 
