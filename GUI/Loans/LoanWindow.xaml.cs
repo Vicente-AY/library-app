@@ -30,17 +30,7 @@ namespace library_app.GUI.Loans
         {
             InitializeComponent();
 
-            List<string> genre = new List<string> { "All" };
-            
-            using(var db = new LibraryContext())
-            {
-                List<string> genreList = db.LibraryItems.Select(i => i.genre).Distinct().ToList();
-                genre.AddRange(genreList);
-            }
-
-            cmbGenre.ItemsSource = genre;
-            cmbGenre.SelectedIndex = 0;
-
+            GenreFilter();
             LoadItems();
         }
 
@@ -48,13 +38,14 @@ namespace library_app.GUI.Loans
         {
             using(var db = new LibraryContext())
             {
-                List<LibraryItem> items = db.LibraryItems.AsNoTracking().ToList();
+                List<LibraryItem> items = db.LibraryItems.Where(i=> !i.lost).AsNoTracking().OrderBy(i => i.title).ToList();
                 allItems = items.Select(i => new SelectableItem(i)).ToList();
                 System.Diagnostics.Debug.WriteLine(items[0].imageRoute);
             }
 
             view = CollectionViewSource.GetDefaultView(allItems);
             view.Filter = FilterItem;
+
             icItems.ItemsSource = view;
         }
 
@@ -96,13 +87,50 @@ namespace library_app.GUI.Loans
             return true;
         }
 
+        private void GenreFilter()
+        {
+
+            if (allItems == null) return;
+
+            bool anyTypeFilterActive = Books.IsChecked == true || Films.IsChecked == true || Music.IsChecked == true || Videogames.IsChecked == true;
+
+            IEnumerable<SelectableItem> filteredItems = allItems.Where(i =>
+            {
+                if (anyTypeFilterActive)
+                {
+                    bool typeMatch = (Books.IsChecked == true && i.item is Book) ||
+                                     (Films.IsChecked == true && i.item is Film) ||
+                                     (Music.IsChecked == true && i.item is MusicAlbum) ||
+                                     (Videogames.IsChecked == true && i.item is Videogame);
+
+                    if (!typeMatch)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            List<string> availableGenre = new List<string> { "All" };
+            availableGenre.AddRange(filteredItems.Select(i => i.item.genre).Distinct().OrderBy(g => g).ToList());
+
+            string? previousGenereFilter = cmbGenre.SelectedItem as string;
+
+            cmbGenre.ItemsSource = availableGenre;
+
+            cmbGenre.SelectedItem = availableGenre.Contains(previousGenereFilter ?? "") ? previousGenereFilter : "All";
+        }
+
         private void Filter_Changed(object sender, RoutedEventArgs e)
         {
+            GenreFilter();
             view?.Refresh();
         }
 
         private void BtnConfirmLoan_Click(object sender, RoutedEventArgs e)
         {
+
             selectedItems = allItems.Where(i => i.Selected).Select(s => s.item).ToList();
 
             if(selectedItems.Count == 0)
