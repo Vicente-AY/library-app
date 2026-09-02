@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:library_app.GUI.Loans"
         mc:Ignorable="d"
-        Title="Checkout" Height="450" Width="800">
+        Title="Checkout" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <local:BoolToCardBackgroundConverter x:Key="BoolToCardBackgroundConverter"/>
@@ -23,25 +24,25 @@
         <TextBlock Text="Items to Loan" FontSize="18" FontWeight="Bold"
                    Margin="10,0,0,15"/>
 
-        <ListView x:Name="lvCheckoutItems" Grid.Row="1">
+        <ListView x:Name="lvCheckoutItems" Grid.Row="1" SizeChanged="LvCheckoutItems_SizeChanged">
             <ListView.View>
                 <GridView>
 
                     <GridViewColumn Header="Header" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding item.imageRoute, Converter={StaticResource RelativePathToImageConverter}}"
-                                       Height="140" Stretch="Uniform"/>
+                                <Image Source="{Binding imageRoute, Converter={StaticResource RelativePathToImageConverter}}"
+                                       Height="100" Stretch="Uniform"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding item.title}" Width="150"/>
-                    <GridViewColumn Header="Creator" DisplayMemberBinding="{Binding item.creator}" Width="90"/>
-                    <GridViewColumn Header="Year" DisplayMemberBinding="{Binding item.year}" Width="90"/>
-                    <GridViewColumn Header="Media" DisplayMemberBinding="{Binding item.media}" Width="90"/>
-                    <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding item.genre}" Width="90"/>
-                    <GridViewColumn Header="Availability" DisplayMemberBinding="{Binding item.availability}" Width="90"/>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding title}" Width="150"/>
+                    <GridViewColumn Header="Creator" DisplayMemberBinding="{Binding creator}" Width="90"/>
+                    <GridViewColumn Header="Year" DisplayMemberBinding="{Binding year}" Width="90"/>
+                    <GridViewColumn Header="Media" DisplayMemberBinding="{Binding media}" Width="90"/>
+                    <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding genre}" Width="90"/>
+                    <GridViewColumn Header="Availability" DisplayMemberBinding="{Binding availability}" Width="90"/>
 
                     <GridViewColumn Header="Action" Width="100">
                         <GridViewColumn.CellTemplate>

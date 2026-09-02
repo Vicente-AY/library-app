@@ -88,5 +88,26 @@ namespace library_app.GUI.Loans
             //Hacer logica de cerar loans
         }
 
+        private void LvCheckoutItems_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (lvCheckoutItems.View is GridView gridView)
+            {
+                // Ancho total de la lista menos un margen para la barra de desplazamiento
+                double totalWidth = lvCheckoutItems.ActualWidth - 35;
+
+                if (totalWidth <= 0) return;
+
+                // Asignamos porcentajes del ancho total a las columnas
+                gridView.Columns[0].Width = totalWidth * 0.08; // Header / Imagen (5%)
+                gridView.Columns[1].Width = totalWidth * 0.28; // Title (27%)
+                gridView.Columns[2].Width = totalWidth * 0.18; // Creator (18%)
+                gridView.Columns[3].Width = totalWidth * 0.08; // Year (8%)
+                gridView.Columns[4].Width = totalWidth * 0.10; // Media (10%)
+                gridView.Columns[5].Width = totalWidth * 0.10; // Genre (12%)
+                gridView.Columns[6].Width = totalWidth * 0.10; // Availability (10%)
+                gridView.Columns[7].Width = totalWidth * 0.10; // Botón (10%)
+            }
+        }
+
     }
 }
