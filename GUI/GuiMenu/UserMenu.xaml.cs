@@ -10,11 +10,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Users;
 
 namespace library_app.GUI.GuiMenu
 {
     public partial class UserMenu : Window
     {
+
         public UserMenu()
         {
             InitializeComponent();

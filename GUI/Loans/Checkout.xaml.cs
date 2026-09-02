@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Items;
 
 namespace library_app.GUI.Loans
 {
@@ -17,9 +18,30 @@ namespace library_app.GUI.Loans
     /// </summary>
     public partial class Checkout : Window
     {
-        public Checkout()
+
+        List<LibraryItem> items = new List<LibraryItem>();
+
+        public Checkout(List<LibraryItem> selectedItems)
         {
             InitializeComponent();
+
+            this.items = selectedItems;
         }
+
+        private void BtnRemoveItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnCancelLoan_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void BtnConfirmLoan_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

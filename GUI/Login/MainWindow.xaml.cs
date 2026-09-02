@@ -49,6 +49,9 @@ namespace library_app.GUI.Login
 
                     if (loginVerifier.CheckPass(pass, user))
                     {
+
+                        UserSession.Login(user!);
+
                         UserMenu userMenu = new UserMenu();
                         userMenu.Show();
 

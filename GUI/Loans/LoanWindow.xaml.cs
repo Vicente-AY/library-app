@@ -14,6 +14,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Items;
 using library_app.GUI.GuiMenu;
+using Users;
 
 namespace library_app.GUI.Loans
 {
@@ -136,10 +137,13 @@ namespace library_app.GUI.Loans
             if(selectedItems.Count == 0)
             {
                 MessageBox.Show("Please, select at least an item");
+                return;
             }
 
-            //cambiar a otra vista donde el usuario vea lo que ha seleccionado
+            Checkout checkItems = new Checkout(selectedItems);
+            checkItems.Show();
 
+            this.Close();
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,62 @@
         xmlns:local="clr-namespace:library_app.GUI.Loans"
         mc:Ignorable="d"
         Title="Checkout" Height="450" Width="800">
+
+    <Window.Resources>
+        <local:BoolToCardBackgroundConverter x:Key="BoolToCardBackgroundConverter"/>
+        <local:RelativePathToImageConverter x:Key="RelativePathToImageConverter"/>
+    </Window.Resources>
+
     <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Tabla -->
+            <RowDefinition Height="*"/> <!-- Tarjetas -->
+            <RowDefinition Height="Auto" /><!-- Botones Confirmar/cancelar-->
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Items to Loan" FontSize="18" FontWeight="Bold"
+                   Margin="10,0,0,15"/>
+
+        <ListView x:Name="lvCheckoutItems" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn Header="Header" Width="60">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding item.imageRoute, Converter={StaticResource RelativePathToImageConverter}}"
+                                       Height="140" Stretch="Uniform"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding item.title}" Width="150"/>
+                    <GridViewColumn Header="Creator" DisplayMemberBinding="{Binding item.creator}" Width="90"/>
+                    <GridViewColumn Header="Year" DisplayMemberBinding="{Binding item.year}" Width="90"/>
+                    <GridViewColumn Header="Media" DisplayMemberBinding="{Binding item.media}" Width="90"/>
+                    <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding item.genre}" Width="90"/>
+                    <GridViewColumn Header="Availability" DisplayMemberBinding="{Binding item.availability}" Width="90"/>
+
+                    <GridViewColumn Header="Action" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Remove"
+                                        Click="BtnRemoveItem_Click"
+                                        Tag="{Binding}"
+                                        Padding="5,2" Background="#FFDDDD" Foreground="DarkRed"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Content="Cancel" Click="BtnCancelLoan_Click" Width="160" Margin="0,0,10,0"/>
+            <Button Content="Confirm Loan" Click="BtnConfirmLoan_Click" Width="150" Background="#007ACC" Foreground="White" FontWeight="Bold"/> 
+        </StackPanel>
         
     </Grid>
 </Window>
