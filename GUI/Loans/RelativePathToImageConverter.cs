@@ -8,7 +8,7 @@ namespace library_app.GUI.Loans
 {
     public class RelativePathToImageConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is not string relativePath || string.IsNullOrWhiteSpace(relativePath))
                 return null;

@@ -41,9 +41,6 @@ namespace library_app.GUI.Loans
             cmbGenre.ItemsSource = genre;
             cmbGenre.SelectedIndex = 0;
 
-            System.Diagnostics.Debug.WriteLine("Base directory: " + AppDomain.CurrentDomain.BaseDirectory);
-            System.Diagnostics.Debug.WriteLine("Current directory: " + Environment.CurrentDirectory);
-
             LoadItems();
         }
 
@@ -119,7 +116,10 @@ namespace library_app.GUI.Loans
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            if(selectedItems.Count > 0)
+
+            selectedItems = allItems.Where(i => i.Selected).Select(s => s.item).ToList();
+
+            if (selectedItems.Count > 0)
             {
                 var result = MessageBox.Show("You have items selected. Are you sure you want to cancell the operation?",
                     "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Warning);
