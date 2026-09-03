@@ -85,7 +85,7 @@ namespace library_app.GUI.Loans
 
         public void BtnConfirmLoan_Click(object sender, RoutedEventArgs e)
         {
-            //Hacer logica de cerar loans
+            //Hacer logica de crear loans
         }
 
         private void LvCheckoutItems_SizeChanged(object sender, SizeChangedEventArgs e)

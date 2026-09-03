@@ -32,6 +32,11 @@ namespace library_app.GUI.Login
                 string pass = txtPass.Password;
                 string pass2 = txtPass2.Password;
 
+                if(string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(pass) || string.IsNullOrWhiteSpace(pass2))
+                {
+                    throw new EmptyException("Please fill all fields to complete the Registration");
+                }
+
                 if (!pass.Equals(pass2))
                 {
                     throw new NotMatchException("The passwords dont match. Please try again");

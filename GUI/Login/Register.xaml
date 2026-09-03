@@ -14,7 +14,30 @@
             <TextBlock Text="Register" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
             <TextBlock Text="User" FontSize="18" HorizontalAlignment="Center"/>
-            <TextBox x:Name="txtUser" Padding="3" Margin="0,0,0,20" Width="150"/>
+            <TextBox x:Name="txtUser" Padding="3" Margin="0,0,0,20" Width="150">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Tag" Value="true"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            
+            <!--PopUp User-->
+            <Popup PlacementTarget="{Binding ElementName=txtUser}"
+                   Placement="Top"
+                   IsOpen="{Binding ElementName=txtUser, Path=IsFocused, Mode=OneWay}"
+                   AllowsTransparency="True">
+                <Border Background="#FFFFE1" BorderBrush="#E6DB55" BorderThickness="1" CornerRadius="4" Padding="8"
+                        Margin="10,0,0,0">
+                    <TextBlock Text="* Minimum 7 Characters&#10; * First one must be an Uppercase&#10; * No spaces Allowed&#10;" FontSize="12"
+                               Foreground="#333"/>
+                </Border>
+
+            </Popup>
 
             <TextBlock Text="Password" FontSize="18" HorizontalAlignment="Center"/>
             <PasswordBox x:Name="txtPass" Padding="3" Margin="0,0,0,20" Width="150"/>
