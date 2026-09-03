@@ -20,7 +20,7 @@
 
             <!--PopUp User-->
             <Popup PlacementTarget="{Binding ElementName=txtUser}"
-                   Placement="Top"
+                   Placement="Right"
                    IsOpen="{Binding ElementName=txtUser, Path=IsFocused, Mode=OneWay}"
                    AllowsTransparency="True">
                 <Border Background="#FFFFE1" BorderBrush="#E6DB55" BorderThickness="1" CornerRadius="4" Padding="8"
@@ -36,12 +36,12 @@
 
             <!--PopUp pass-->
             <Popup PlacementTarget="{Binding ElementName=txtPass}"
-                   Placement="Top"
+                   Placement="Right"
                    IsOpen="{Binding ElementName=txtPass, Path=IsFocused, Mode=OneWay}"
                    AllowsTransparency="True">
                 <Border Background="#FFFFE1" BorderBrush="#E6DB55" BorderThickness="1" CornerRadius="4" Padding="8"
                         Margin="10,0,0,0">
-                    <TextBlock Text="* Minimum 7 Characters&#10;* One Uppercase and one Lowercase&#10;* One Digit&#10;* One Special Character&#10;" FontSize="12"
+                    <TextBlock Text="* Minimum 7 Characters&#10;* One Uppercase and one Lowercase&#10;* One Digit&#10;* One Special Character&#10;* No spaces Allowed&#10;" FontSize="12"
                                Foreground="#333"/>
                 </Border>
 
