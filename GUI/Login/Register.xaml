@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:library_app.GUI.Login"
         mc:Ignorable="d"
         Title="Register" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Focusable="True"
+        MouseDown="Window_MouseDown">
     
-    <Grid>
+    <Grid Background="Transparent">
         <StackPanel>
             
             <TextBlock Text="Register" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,20"/>
@@ -23,7 +25,7 @@
                    AllowsTransparency="True">
                 <Border Background="#FFFFE1" BorderBrush="#E6DB55" BorderThickness="1" CornerRadius="4" Padding="8"
                         Margin="10,0,0,0">
-                    <TextBlock Text="* Minimum 7 Characters&#10; * First one must be an Uppercase&#10; * No spaces Allowed&#10;" FontSize="12"
+                    <TextBlock Text="* Minimum 7 Characters&#10;* First one must be an Uppercase&#10;* No spaces Allowed&#10;" FontSize="12"
                                Foreground="#333"/>
                 </Border>
 
@@ -39,7 +41,7 @@
                    AllowsTransparency="True">
                 <Border Background="#FFFFE1" BorderBrush="#E6DB55" BorderThickness="1" CornerRadius="4" Padding="8"
                         Margin="10,0,0,0">
-                    <TextBlock Text="* Minimum 7 Characters&#10; * One Uppercase and one Lowercase&#10; * One Digit&#10; * One Special Character&#10;" FontSize="12"
+                    <TextBlock Text="* Minimum 7 Characters&#10;* One Uppercase and one Lowercase&#10;* One Digit&#10;* One Special Character&#10;" FontSize="12"
                                Foreground="#333"/>
                 </Border>
 

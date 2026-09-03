@@ -83,5 +83,10 @@ namespace library_app.GUI.Login
 
             this.Close();
         }
+
+        private void Window_MouseDown(object sender, RoutedEventArgs e)
+        {
+            FocusManager.SetFocusedElement(this, this);
+        }
     }
 }
