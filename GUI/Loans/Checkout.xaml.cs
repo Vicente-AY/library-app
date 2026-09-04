@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Users;
+using Utils;
 
 namespace library_app.GUI.Loans
 {
@@ -73,11 +74,14 @@ namespace library_app.GUI.Loans
         public void BtnConfirmLoan_Click(object sender, RoutedEventArgs e)
         {
 
-            var alreadyLoanedItems = items.Where(i => UserSession.currentUser!.loanList.Any(l => l.item.id == i.id)).ToList();
+            string titles = "";
+            User user = UserSession.currentUser!;
+
+            var alreadyLoanedItems = items.Where(i => user.loanList.Any(l => l.item.id == i.id)).ToList();
 
             if(alreadyLoanedItems.Count > 0)
             {
-                string titles = string.Join(", ", alreadyLoanedItems.Select(i => i.title));
+                titles = string.Join(", ", alreadyLoanedItems.Select(i => i.title));
 
                 var result = MessageBox.Show($"You have already Loaned the next Items: {titles}. Do you want to deselect the items?",
                              "Duplicate Loan", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -101,7 +105,7 @@ namespace library_app.GUI.Loans
 
             if(waitList.Count > 0)
             {
-                string titles = string.Join(", ", waitList.Select(i => i.title));
+                titles = string.Join(", ", waitList.Select(i => i.title));
 
                 var result = MessageBox.Show($"The next Items are not available: {titles}. Do you want to deselect the items?",
                              "Not Available Items", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -120,7 +124,17 @@ namespace library_app.GUI.Loans
                 }
             }
 
-            //Hacer logica de crear loans
+            LoanWaitlistBuilder.LoanCreation(user, items);
+
+            titles = string.Join(", ", alreadyLoanedItems.Select(i => i.title));
+            string message = items.Count == 1 ? $"Loan Created {titles}" : $"Loans Created {titles}";
+
+            MessageBox.Show(message, "Completed", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            UserMenu uMenu = new UserMenu();
+            uMenu.Show();
+
+            this.Close();
         }
 
         private void LvCheckoutItems_SizeChanged(object sender, SizeChangedEventArgs e)
