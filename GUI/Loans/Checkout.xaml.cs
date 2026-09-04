@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Users;
 
 namespace library_app.GUI.Loans
 {
@@ -40,21 +41,7 @@ namespace library_app.GUI.Loans
 
                 if (items.Count == 0)
                 {
-                    var result = MessageBox.Show("You have removed all the Selected Items",
-                                 "Confirm", MessageBoxButton.RetryCancel, MessageBoxImage.Warning);
-
-                    if (result == MessageBoxResult.Retry)
-                    {
-                        LoanWindow lWindow = new LoanWindow();
-                        lWindow.Show();
-                    }
-                    if (result == MessageBoxResult.Cancel)
-                    {
-                        UserMenu uMenu = new UserMenu();
-                        uMenu.Show();
-                    }
-
-                    this.Close();
+                    GoBack();
 
                 }
             }
@@ -85,6 +72,30 @@ namespace library_app.GUI.Loans
 
         public void BtnConfirmLoan_Click(object sender, RoutedEventArgs e)
         {
+
+            var alreadyLoanedItems = items.Where(i => UserSession.currentUser!.loanList.Any(l => l.item.id == i.id)).ToList();
+
+            if(alreadyLoanedItems.Count > 0)
+            {
+                string titles = string.Join(", ", alreadyLoanedItems.Select(i => i.title));
+
+                var result = MessageBox.Show($"You have already Loaned the next Items: {titles}. Do you want to deselect the items?",
+                             "Duplicate Loan", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if(result == MessageBoxResult.Yes)
+                {
+                    foreach(var i in alreadyLoanedItems)
+                    {
+                        items.Remove(i);
+                    }
+                    
+                    if(items.Count == 0)
+                    {
+                        GoBack();
+                    }
+                }
+            }
+
             //Hacer logica de crear loans
         }
 
@@ -107,6 +118,26 @@ namespace library_app.GUI.Loans
                 gridView.Columns[6].Width = totalWidth * 0.10; // Availability (10%)
                 gridView.Columns[7].Width = totalWidth * 0.10; // Botón (10%)
             }
+        }
+
+        private void GoBack()
+        {
+
+            var result = MessageBox.Show("You have removed all the Selected Items",
+             "Confirm", MessageBoxButton.RetryCancel, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Retry)
+            {
+                LoanWindow lWindow = new LoanWindow();
+                lWindow.Show();
+            }
+            if (result == MessageBoxResult.Cancel)
+            {
+                UserMenu uMenu = new UserMenu();
+                uMenu.Show();
+            }
+
+            this.Close();
         }
 
     }
