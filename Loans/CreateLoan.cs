@@ -36,7 +36,7 @@ public class CreateLoan
         foreach(var sItem in selectedItems)
         {
             if(sItem.availability == Availability.Available){
-                waitlistLoanBuilder.LoanCreation(user, sItem, db);
+                //waitlistLoanBuilder.LoanCreation(user, sItem, db);
             }
             else
             {
@@ -103,7 +103,7 @@ public class CreateLoan
                 return;
             }
 
-            waitlistLoanBuilder.LoanCreation(user, item, db);
+            //waitlistLoanBuilder.LoanCreation(user, item, db);
         }
 
         db.SaveChanges();

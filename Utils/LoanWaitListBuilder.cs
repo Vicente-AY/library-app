@@ -8,21 +8,26 @@ namespace Utils;
 
 public class LoanWaitlistBuilder
 {
-    public void LoanCreation(User user, List<LibraryItem> items)
+    public static void LoanCreation(User user, IEnumerable<LibraryItem> items)
     {
         NotificacionGenerator notGen = new NotificacionGenerator();
         using (var db = new LibraryContext())
         {
+            int maxId = db.Loans.Select(i => (int?)i.id).Max() ?? 0;
+            db.Users.Attach(user);
             foreach (var item in items)
             {
-                int id = 0;
+
+                db.LibraryItems.Attach(item);
+
+                maxId++;
                 DateTime loanCreated = DateTime.Now;
                 int days = (item is Book) ? 15 : 7;
                 DateTime expectedReturn = loanCreated.AddDays(days);
 
-                id = (db.Loans.Select(i => (int?)i.id).Max() ?? 0) + 1;
+                
 
-                Loan loan = new Loan(id, item, loanCreated, expectedReturn, user);
+                Loan loan = new Loan(maxId, item, loanCreated, expectedReturn, user);
 
                 db.Loans.Add(loan);
                 user.loanList.Add(loan);

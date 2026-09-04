@@ -98,6 +98,7 @@ namespace library_app.GUI.Loans
                         GoBack();
                     }
                 }
+                return;
             }
 
             //aquí iria la opción de entrar en la lista de espera.
@@ -112,7 +113,7 @@ namespace library_app.GUI.Loans
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    foreach (var i in alreadyLoanedItems)
+                    foreach (var i in waitList)
                     {
                         items.Remove(i);
                     }
@@ -122,6 +123,7 @@ namespace library_app.GUI.Loans
                         GoBack();
                     }
                 }
+                return;
             }
 
             LoanWaitlistBuilder.LoanCreation(user, items);

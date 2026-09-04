@@ -55,7 +55,7 @@ public class ReservationPickUp
             s.pickUpDate = DateTime.Now;
             s.active = false;
 
-            loanBuilder.LoanCreation(user, item, db);
+            //loanBuilder.LoanCreation(user, item, db);
         }
     }
 
