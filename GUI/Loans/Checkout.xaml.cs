@@ -96,6 +96,30 @@ namespace library_app.GUI.Loans
                 }
             }
 
+            //aquí iria la opción de entrar en la lista de espera.
+            List<LibraryItem> waitList = items.Where(i => i.availability != Utils.Availability.Available).ToList();
+
+            if(waitList.Count > 0)
+            {
+                string titles = string.Join(", ", waitList.Select(i => i.title));
+
+                var result = MessageBox.Show($"The next Items are not available: {titles}. Do you want to deselect the items?",
+                             "Not Available Items", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    foreach (var i in alreadyLoanedItems)
+                    {
+                        items.Remove(i);
+                    }
+
+                    if (items.Count == 0)
+                    {
+                        GoBack();
+                    }
+                }
+            }
+
             //Hacer logica de crear loans
         }
 
