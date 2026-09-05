@@ -1,6 +1,12 @@
-﻿using System;
+﻿using Data;
+using Items;
+using library_app.GUI.GuiMenu;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,12 +16,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Data;
-using Microsoft.EntityFrameworkCore;
-using Items;
-using library_app.GUI.GuiMenu;
 using Users;
-using System.Security.Cryptography;
+using Utils;
 
 namespace library_app.GUI.Loans
 {
@@ -136,10 +138,18 @@ namespace library_app.GUI.Loans
         {
 
             selectedItems = allItems.Where(i => i.Selected).Select(s => s.item).ToList();
+            int maxLoans = UserSession.currentUser is User ? 5 : 10;
 
-            if(selectedItems.Count == 0)
+            if (selectedItems.Count == 0)
             {
                 MessageBox.Show("Please, select at least an item");
+                return;
+            }
+
+            //Limite de loans
+            else if (UserSession.currentUser!.loanList.Count >= maxLoans && selectedItems.Any(i => i.availability == Availability.Available))
+            {
+                MessageBox.Show("You have already reach the Loan limit. You can only select Lent or in Mainteneance Items for waitlist");
                 return;
             }
 

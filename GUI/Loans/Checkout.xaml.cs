@@ -77,6 +77,16 @@ namespace library_app.GUI.Loans
         public void BtnConfirmLoan_Click(object sender, RoutedEventArgs e)
         {
 
+            //Limite de loans
+            int maxLoans = currentUser is User ? 5 : 10;
+            int expectedLoans = items.Where(i => i.availability == Availability.Available).ToList().Count();
+            int totalExpectedLoans = expectedLoans + currentUser.loanList.Count();
+            if (totalExpectedLoans > maxLoans)
+            {
+                MessageBox.Show($"Sorry, you surpass your Loan limit with the current selection. Please remove {totalExpectedLoans - maxLoans} Available Items");
+                return;
+            }
+
             string titles = "";
 
             var alreadyLoanedItems = items.Where(i => currentUser.loanList.Any(l => l.item.id == i.id)).ToList();
@@ -125,16 +135,6 @@ namespace library_app.GUI.Loans
                         GoBack();
                     }
                 }
-                return;
-            }
-
-            //Limite de loans
-            int maxLoans = currentUser is User ? 5 : 10;
-            int expectedLoans = items.Where(i => i.availability == Availability.Available).ToList().Count();
-            int totalExpectedLoans = expectedLoans + currentUser.loanList.Count();
-            if (totalExpectedLoans > maxLoans)
-            {
-                MessageBox.Show($"Sorry, you surpass your Loan limit with the current selection. Please remove {totalExpectedLoans - maxLoans} Available Items");
                 return;
             }
 
