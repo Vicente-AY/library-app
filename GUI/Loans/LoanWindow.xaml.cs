@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Items;
 using library_app.GUI.GuiMenu;
 using Users;
+using System.Security.Cryptography;
 
 namespace library_app.GUI.Loans
 {
@@ -33,6 +34,8 @@ namespace library_app.GUI.Loans
 
             GenreFilter();
             LoadItems();
+            ChangeSelection();
+            LoadSumary();
         }
 
         private void LoadItems()
@@ -169,6 +172,37 @@ namespace library_app.GUI.Loans
 
             this.Close();
 
+        }
+
+        private void LoadSumary()
+        {
+
+            int maxAllowedLoan = UserSession.currentUser is User ? 5 : 10;
+
+            int selected = allItems.Count(i => i.Selected);
+            int activeLoans = UserSession.currentUser!.loanList.Count;
+            int available = maxAllowedLoan - activeLoans;
+
+            txtSelectedCount.Text = selected.ToString();
+            txtActiveLoans.Text = activeLoans.ToString();
+            txtAvailableLoanSlots.Text = available.ToString();
+
+        }
+
+        private void ChangeSelection()
+        {
+            foreach (var selectableItem in allItems)
+            {
+                selectableItem.PropertyChanged += SelectableItem_PropertyChanged;
+            }
+        }
+
+        private void SelectableItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SelectableItem.Selected))
+            {
+                LoadSumary();
+            }
         }
     }
 }

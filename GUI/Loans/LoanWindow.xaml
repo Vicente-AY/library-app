@@ -116,10 +116,47 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <Button Grid.Row="2" Content="Complete Loan" HorizontalAlignment="Right" Margin="0,10,0,0"
-                Padding="0,10,0,0" Click="BtnConfirmLoan_Click"/>
-        <Button Grid.Row="2" Content="Back" HorizontalAlignment="Left" Margin="0,10,0,0"
-                Padding="0,10,0,0" Click="BtnBack_Click"/>
+        <!-- Botones e info-->
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--BackButton-->
+            <Button Grid.Column="0" Content="Back" Click="BtnBack_Click" FontSize="15"
+                    Height="35" Width="70" HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"/>
+            
+            <!--Info-->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock FontSize="14" VerticalAlignment="Center" Margin="10,0">
+                    <Run Text="Selected: " FontWeight="SemiBold"/>
+                    <Run x:Name="txtSelectedCount" Text="0" Foreground="#007ACC" FontWeight="Bold"/>
+                </TextBlock>
+
+                <TextBlock Text="|" Foreground="Gray" VerticalAlignment="Center" Margin="5,0"/>
+
+                <TextBlock FontSize="14" VerticalAlignment="Center" Margin="10,0">
+                    <Run Text="User Active Loans: " FontWeight="SemiBold"/>
+                    <Run x:Name="txtActiveLoans" Text="0" Foreground="#E67E22" FontWeight="Bold"/>
+                </TextBlock>
+
+                <TextBlock Text="|" Foreground="Gray" VerticalAlignment="Center" Margin="5,0"/>
+
+                <TextBlock FontSize="14" VerticalAlignment="Center" Margin="10,0">
+                    <Run Text="Available Loan Slots: " FontWeight="SemiBold"/>
+                    <Run x:Name="txtAvailableLoanSlots" Text="0" Foreground="#27AE60" FontWeight="Bold"/>
+                </TextBlock>
+            </StackPanel>
+
+            <!--Loan Button-->
+            <Button Grid.Column="2" Content="Complete Loan" Click="BtnConfirmLoan_Click" FontSize="15"
+                    Height="35" HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"/>
+        </Grid>
 
     </Grid>
 </Window>

@@ -25,7 +25,7 @@ namespace library_app.GUI.Loans
                 bitmap.UriSource = new Uri(fullPath, UriKind.Absolute);
                 bitmap.CacheOption = BitmapCacheOption.OnLoad;
                 bitmap.EndInit();
-                bitmap.Freeze(); // buena práctica para imágenes usadas en bindings
+                bitmap.Freeze(); 
                 return bitmap;
             }
             catch (NotSupportedException)
