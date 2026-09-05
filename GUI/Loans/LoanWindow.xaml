@@ -153,7 +153,7 @@
             </StackPanel>
 
             <!--Loan Button-->
-            <Button Grid.Column="2" Content="Complete Loan" Click="BtnConfirmLoan_Click" FontSize="15"
+            <Button Grid.Column="2" Content="Checkout" Click="BtnConfirmLoan_Click" FontSize="15"
                     Height="35" HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"/>
         </Grid>

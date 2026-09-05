@@ -25,12 +25,15 @@ namespace library_app.GUI.Loans
     {
 
         private ObservableCollection<LibraryItem> items;
+        private User currentUser = null!;
 
         public Checkout(List<LibraryItem> selectedItems)
         {
             InitializeComponent();
 
+            this.currentUser = UserSession.currentUser!;
             this.items = new ObservableCollection<LibraryItem>(selectedItems);
+
             lvCheckoutItems.ItemsSource = items;
         }
 
@@ -75,9 +78,8 @@ namespace library_app.GUI.Loans
         {
 
             string titles = "";
-            User user = UserSession.currentUser!;
 
-            var alreadyLoanedItems = items.Where(i => user.loanList.Any(l => l.item.id == i.id)).ToList();
+            var alreadyLoanedItems = items.Where(i => currentUser.loanList.Any(l => l.item.id == i.id)).ToList();
 
             if(alreadyLoanedItems.Count > 0)
             {
@@ -108,7 +110,7 @@ namespace library_app.GUI.Loans
             {
                 titles = string.Join(", ", waitList.Select(i => i.title));
 
-                var result = MessageBox.Show($"The next Items are not available: {titles}. Do you want to deselect the items?",
+                var result = MessageBox.Show($"The next Items are not available: {titles} and the waitlist function is not ready yet. Do you want to deselect the items?",
                              "Not Available Items", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
@@ -126,9 +128,20 @@ namespace library_app.GUI.Loans
                 return;
             }
 
-            LoanWaitlistBuilder.LoanCreation(user, items);
+            //Limite de loans
+            int maxLoans = currentUser is User ? 5 : 10;
+            int expectedLoans = items.Where(i => i.availability == Availability.Available).ToList().Count();
+            int totalExpectedLoans = expectedLoans + currentUser.loanList.Count();
+            if (totalExpectedLoans > maxLoans)
+            {
+                MessageBox.Show($"Sorry, you surpass your Loan limit with the current selection. Please remove {totalExpectedLoans - maxLoans} Available Items");
+                return;
+            }
 
-            titles = string.Join(", ", alreadyLoanedItems.Select(i => i.title));
+            //crearLoans
+            LoanWaitlistBuilder.LoanCreation(currentUser, items);
+
+            titles = string.Join(", ", items.Select(i => i.title));
             string message = items.Count == 1 ? $"Loan Created {titles}" : $"Loans Created {titles}";
 
             MessageBox.Show(message, "Completed", MessageBoxButton.OK, MessageBoxImage.Information);
