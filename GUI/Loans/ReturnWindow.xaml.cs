@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Items;
+using library_app.GUI.GuiMenu;
+using Loans;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,17 +13,35 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Users;
 
 namespace library_app.GUI.Loans
 {
-    /// <summary>
-    /// Lógica de interacción para ReturnWindow.xaml
-    /// </summary>
     public partial class ReturnWindow : Window
     {
+        User currentUser = null!;
+        private ObservableCollection<Loan> loans;
+
         public ReturnWindow()
         {
+
             InitializeComponent();
+
+            this.currentUser = UserSession.currentUser!;
+            this.loans = new ObservableCollection<Loan>(currentUser.loanList);
+            lvReturnItems.ItemsSource = loans;
+
+            CheckPositiveActiveLoans();
+        }
+
+        private void CheckPositiveActiveLoans()
+        {
+            if (this.loans.Count() <= 0)
+            {
+                MessageBox.Show("You have no Active loans. Returning to Main Menu",
+                "Returning", MessageBoxButton.OK, MessageBoxImage.Information);
+                GoBack();
+            }
         }
 
         private void BtnReturnAll_Click(object sender, RoutedEventArgs e)
@@ -29,12 +51,31 @@ namespace library_app.GUI.Loans
 
         private void BtnReturnItem_Click(object sender, RoutedEventArgs e)
         {
+            if (sender is Button btn && btn.Tag is Loan returnLoan)
+            {
+                loans.Remove(returnLoan);
 
+                if (loans.Count == 0)
+                {
+                    MessageBox.Show("You have Return all the Loaned Items",
+                    "Confirm", MessageBoxButton.OK, MessageBoxImage.Information);
+                    GoBack();
+                }
+            }
         }
 
         private void BtnCancelReturn_Click(object sender, RoutedEventArgs e)
         {
+            GoBack();
+        }
 
+        private void GoBack()
+        {
+
+            UserMenu uMenu = new UserMenu();
+            uMenu.Show();
+
+            this.Close();
         }
 
         private void LvCheckoutItems_SizeChanged(object sender, SizeChangedEventArgs e)
