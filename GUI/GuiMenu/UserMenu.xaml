@@ -8,7 +8,24 @@
         Title="UserMenu" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock Text="Holiwi UwU" HorizontalAlignment="Center" FontSize="85"/>
-        <Button x:Name="btnSearch" Click="BtnSearch_Click"  Content="Search for an Item" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Tabla -->
+            <RowDefinition Height="Auto"/>
+            <!-- Tarjetas -->
+            <RowDefinition Height="Auto" />
+            <!-- Botones Confirmar/cancelar-->
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="User Menu" HorizontalAlignment="Center" FontSize="85"/>
+        <Button Grid.Row="1" x:Name="btnSearch" Click="BtnSearch_Click"
+                Content="Search for an Item" VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                Margin="10"/>
+
+        <Button Grid.Row="2" x:Name="btnReturn" Click="BtnReturnItem_Click"
+                Content="Return Items" VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                Margin="10"/>
     </Grid>
 </Window>

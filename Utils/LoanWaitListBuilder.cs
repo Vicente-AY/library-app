@@ -25,12 +25,9 @@ public class LoanWaitlistBuilder
                 int days = (item is Book) ? 15 : 7;
                 DateTime expectedReturn = loanCreated.AddDays(days);
 
-                
-
                 Loan loan = new Loan(maxId, item, loanCreated, expectedReturn, user);
 
                 db.Loans.Add(loan);
-                user.loanList.Add(loan);
                 notGen.GenerateNotification(user, $"Successfuly loaned ID: {item.id} | {item.title}. Return Date: {expectedReturn.ToString("dd/MM/yyyy")}");
                 item.availability = Availability.Lent;
             }

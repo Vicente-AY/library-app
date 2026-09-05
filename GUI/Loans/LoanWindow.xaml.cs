@@ -74,7 +74,7 @@ namespace library_app.GUI.Loans
                 }
             }
 
-            if(Available.IsChecked == true && i.item.availability != Utils.Availability.Available)
+            if(Available.IsChecked == true && i.item.availability != Availability.Available)
             {
                 return false;
             }

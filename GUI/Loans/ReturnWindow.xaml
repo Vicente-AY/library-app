@@ -34,18 +34,16 @@
                     <GridViewColumn Header="Header" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding imageRoute, Converter={StaticResource RelativePathToImageConverter}}"
+                                <Image Source="{Binding item.imageRoute, Converter={StaticResource RelativePathToImageConverter}}"
                                        Height="100" Stretch="Uniform"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding title}" Width="150"/>
-                    <GridViewColumn Header="Creator" DisplayMemberBinding="{Binding creator}" Width="90"/>
-                    <GridViewColumn Header="Year" DisplayMemberBinding="{Binding year}" Width="90"/>
-                    <GridViewColumn Header="Media" DisplayMemberBinding="{Binding media}" Width="90"/>
-                    <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding genre}" Width="90"/>
-                    <GridViewColumn Header="Availability" DisplayMemberBinding="{Binding availability}" Width="90"/>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding item.title}" Width="150"/>
+                    <GridViewColumn Header="Loan Created" DisplayMemberBinding="{Binding loanCreated}" Width="90"/>
+                    <GridViewColumn Header="Loan Final Date" DisplayMemberBinding="{Binding expectedReturn}" Width="90"/>
+                    <GridViewColumn Header="Extended Loan" DisplayMemberBinding="{Binding extended}" Width="90"/>
 
                     <GridViewColumn Header="Action" Width="100">
                         <GridViewColumn.CellTemplate>
@@ -53,7 +51,7 @@
                                 <Button Content="Return"
                                         Click="BtnReturnItem_Click"
                                         Tag="{Binding}"
-                                        Padding="5,2" Background="#FFDDDD" Foreground="DarkRed"/>
+                                        Padding="5,2" Background="#FFDDDD" Foreground="DarkBlue"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

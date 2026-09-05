@@ -29,5 +29,19 @@ namespace library_app.GUI.GuiMenu
 
             this.Close();
         }
+
+        private void BtnReturnItem_Click(object sender, RoutedEventArgs f)
+        {
+            if(UserSession.currentUser!.loanList.Count() <= 0)
+            {
+                MessageBox.Show("You have no active Loans");
+                return;
+            }
+
+            ReturnWindow rWindow = new ReturnWindow();
+            rWindow.Show();
+
+            this.Close();
+        }
     }
 }

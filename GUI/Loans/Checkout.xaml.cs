@@ -114,7 +114,7 @@ namespace library_app.GUI.Loans
             }
 
             //aquí iria la opción de entrar en la lista de espera.
-            List<LibraryItem> waitList = items.Where(i => i.availability != Utils.Availability.Available).ToList();
+            List<LibraryItem> waitList = items.Where(i => i.availability != Availability.Available).ToList();
 
             if(waitList.Count > 0)
             {

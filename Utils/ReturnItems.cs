@@ -1,4 +1,5 @@
-﻿using Items;
+﻿using Data;
+using Items;
 using Loans;
 using Reservations;
 using System;
@@ -11,43 +12,53 @@ namespace library_app.Utils
 {
     public class ReturnItems
     {
-        public void ReturnLoan(Loan l, User user) {
+        public void ReturnLoan(Loan l, User user)
+        {
 
-            //Metodos en standby hasta seguir con la GUI
-            //CheckItemStatus(l, l.item, user);
-            //CheckLoanTimeSpanExceed(l, user);
-
-            LibraryItem item = l.item;
-
-            CheckNextReservedUser cleanList = new CheckNextReservedUser();
-            List<WaitEntry> cleanWaitList = cleanList.CheckNextUser(item)!;
-
-            if (cleanWaitList.Count > 0 && item.availability != Availability.Maintenance)
+            using (var db = new LibraryContext())
             {
-                WaitEntry next = cleanWaitList[0];
 
-                User nextUser = next.user;
-                NotificacionGenerator notGen = new NotificacionGenerator();
-                notGen.GenerateNotification(nextUser, $"Available to pick up: ID: {item.id} - {item.title}. The reserve lasts until {cancelationTime.AddDays(2).ToString("dd/MM/yyyy")}");
+                db.Loans.Attach(l);
+                db.Users.Attach(user);
 
-                next.notifiedAt = DateTime.Now;
-                next.expirationDate = DateTime.Now.AddDays(2);
+                //Metodos en standby hasta seguir con la GUI
+                //CheckItemStatus(l, l.item, user);
+                //CheckLoanTimeSpanExceed(l, user);
+
+                LibraryItem item = l.item;
+
+                CheckNextReservedUser cleanList = new CheckNextReservedUser();
+                List<WaitEntry> cleanWaitList = cleanList.CheckNextUser(item)!;
+
+                if (cleanWaitList.Count > 0 && item.availability != Availability.Maintenance)
+                {
+                    WaitEntry next = cleanWaitList[0];
+
+                    User nextUser = next.user;
+                    NotificacionGenerator notGen = new NotificacionGenerator();
+                    notGen.GenerateNotification(nextUser, $"Available to pick up: ID: {item.id} - {item.title}. The reserve lasts until {DateTime.Now.AddDays(2).ToString("dd/MM/yyyy")}");
+
+                    next.notifiedAt = DateTime.Now;
+                    next.expirationDate = DateTime.Now.AddDays(2);
+                }
+                if (l.item.waitList.Count == 0 && l.item.availability != Availability.Maintenance)
+                {
+                    l.item.availability = Availability.Available;
+                }
+
+                l.itemReturned = DateTime.Now;
+
+                TimeSpan loanDuration = l.itemReturned - l.loanCreated;
+                double duration = loanDuration.TotalDays;
+
+                l.loanExtension = (int)Math.Round(duration);
+                l.active = false;
+
+                user.loanList.Remove(l);
+
+                db.SaveChanges();
             }
-            if (l.item.waitList.Count == 0 && l.item.availability != Availability.Maintenance)
-            {
-                l.item.availability = Availability.Available;
-            }
-
-            l.itemReturned = DateTime.Now;
-
-            TimeSpan loanDuration = l.itemReturned - l.loanCreated;
-            double duration = loanDuration.TotalDays;
-
-            l.loanExtension = (int)Math.Round(duration);
-            l.active = false;
-
-            user.loanList.Remove(l);
-        }   
+        }
 
         private void CheckItemStatus(Loan loan, LibraryItem item, User user)
         {

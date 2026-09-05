@@ -1,5 +1,6 @@
 ﻿using Items;
 using library_app.GUI.GuiMenu;
+using library_app.Utils;
 using Loans;
 using System;
 using System.Collections.Generic;
@@ -30,35 +31,37 @@ namespace library_app.GUI.Loans
             this.currentUser = UserSession.currentUser!;
             this.loans = new ObservableCollection<Loan>(currentUser.loanList);
             lvReturnItems.ItemsSource = loans;
-
-            CheckPositiveActiveLoans();
-        }
-
-        private void CheckPositiveActiveLoans()
-        {
-            if (this.loans.Count() <= 0)
-            {
-                MessageBox.Show("You have no Active loans. Returning to Main Menu",
-                "Returning", MessageBoxButton.OK, MessageBoxImage.Information);
-                GoBack();
-            }
         }
 
         private void BtnReturnAll_Click(object sender, RoutedEventArgs e)
         {
 
+            ReturnItems rItems = new ReturnItems();
+            foreach (var loan in loans)
+            {
+                rItems.ReturnLoan(loan, currentUser);
+            }
+
+            MessageBox.Show("You have Return all the Loaned Items",
+            "Confirm", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            GoBack();
         }
 
         private void BtnReturnItem_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.Tag is Loan returnLoan)
             {
+                ReturnItems rItems = new ReturnItems();
+                rItems.ReturnLoan(returnLoan, currentUser);
+
                 loans.Remove(returnLoan);
 
                 if (loans.Count == 0)
                 {
                     MessageBox.Show("You have Return all the Loaned Items",
                     "Confirm", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     GoBack();
                 }
             }
@@ -88,14 +91,12 @@ namespace library_app.GUI.Loans
                 if (totalWidth <= 0) return;
 
                 // Asignamos porcentajes del ancho total a las columnas
-                gridView.Columns[0].Width = totalWidth * 0.08; // Header / Imagen (5%)
-                gridView.Columns[1].Width = totalWidth * 0.28; // Title (27%)
-                gridView.Columns[2].Width = totalWidth * 0.18; // Creator (18%)
-                gridView.Columns[3].Width = totalWidth * 0.08; // Year (8%)
-                gridView.Columns[4].Width = totalWidth * 0.10; // Media (10%)
-                gridView.Columns[5].Width = totalWidth * 0.10; // Genre (12%)
-                gridView.Columns[6].Width = totalWidth * 0.10; // Availability (10%)
-                gridView.Columns[7].Width = totalWidth * 0.10; // Botón (10%)
+                gridView.Columns[0].Width = totalWidth * 0.10; // Header / Imagen (5%)
+                gridView.Columns[1].Width = totalWidth * 0.30; // Title (27%)
+                gridView.Columns[2].Width = totalWidth * 0.20; // Fehca creacion (18%)
+                gridView.Columns[3].Width = totalWidth * 0.20; // Fecha de devolucion esperada(8%)
+                gridView.Columns[4].Width = totalWidth * 0.10; // prestamo extendido (10%)
+                gridView.Columns[5].Width = totalWidth * 0.10; // Botón (10%)
             }
         }
     }
