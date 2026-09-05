@@ -1,4 +1,5 @@
 ﻿using library_app.GUI.Loans;
+using library_app.GUI.Login;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -40,6 +41,18 @@ namespace library_app.GUI.GuiMenu
 
             ReturnWindow rWindow = new ReturnWindow();
             rWindow.Show();
+
+            this.Close();
+        }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs f)
+        {
+            MessageBox.Show("Have a nice day!");
+
+            UserSession.Logout();
+
+            MainWindow main = new MainWindow();
+            main.Show();
 
             this.Close();
         }

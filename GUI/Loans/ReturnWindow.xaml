@@ -51,7 +51,10 @@
                                 <Button Content="Return"
                                         Click="BtnReturnItem_Click"
                                         Tag="{Binding}"
-                                        Padding="5,2" Background="#FFDDDD" Foreground="DarkBlue"/>
+                                        Padding="5,2" 
+                                        Background="#E3F2FD" 
+                                        Foreground="#007ACC" 
+                                        BorderBrush="#007ACC"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
