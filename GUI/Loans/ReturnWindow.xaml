@@ -1,4 +1,4 @@
-﻿<Window x:Class="library_app.GUI.Loans.Checkout"
+﻿<Window x:Class="library_app.GUI.Loans.ReturnWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -24,10 +24,10 @@
             <!-- Botones Confirmar/cancelar-->
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Items to Loan" FontSize="18" FontWeight="Bold"
+        <TextBlock Text="Return List" FontSize="18" FontWeight="Bold"
                    Margin="10,0,0,15"/>
 
-        <ListView x:Name="lvCheckoutItems" Grid.Row="1" SizeChanged="LvCheckoutItems_SizeChanged">
+        <ListView x:Name="lvReturnItems" Grid.Row="1" SizeChanged="LvCheckoutItems_SizeChanged">
             <ListView.View>
                 <GridView>
 
@@ -50,8 +50,8 @@
                     <GridViewColumn Header="Action" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Remove"
-                                        Click="BtnRemoveItem_Click"
+                                <Button Content="Return"
+                                        Click="BtnReturnItem_Click"
                                         Tag="{Binding}"
                                         Padding="5,2" Background="#FFDDDD" Foreground="DarkRed"/>
                             </DataTemplate>
@@ -63,8 +63,8 @@
         </ListView>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button Content="Cancel" Click="BtnCancelLoan_Click" Width="160" Margin="0,0,10,0"/>
-            <Button Content="Confirm Loan" Click="BtnConfirmLoan_Click" Width="150" Background="#007ACC" Foreground="White" FontWeight="Bold"/>
+            <Button Content="Cancel" Click="BtnCancelReturn_Click" Width="160" Margin="0,0,10,0"/>
+            <Button Content="Return every Loan" Click="BtnReturnAll_Click" Width="150" Background="#007ACC" Foreground="White" FontWeight="Bold"/>
         </StackPanel>
 
     </Grid>
