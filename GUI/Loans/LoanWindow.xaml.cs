@@ -186,7 +186,13 @@ namespace library_app.GUI.Loans
 
         private void BtnItemDetails_Click(object sender, RoutedEventArgs e)
         {
+            if(sender is Button btn && btn.Tag is SelectableItem selectable)
+            {
+                LibraryItem itemData = selectable.item;
 
+                ItemDetailsWindow detailsWindow = new ItemDetailsWindow(itemData);
+                detailsWindow.ShowDialog();
+            }
         }
 
         private void LoadSumary()
