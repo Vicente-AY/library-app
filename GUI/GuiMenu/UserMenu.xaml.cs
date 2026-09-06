@@ -21,6 +21,14 @@ namespace library_app.GUI.GuiMenu
         public UserMenu()
         {
             InitializeComponent();
+
+            if (string.IsNullOrWhiteSpace(UserSession.currentUser!.name)) {
+                txbUserMenu.Text = "Welcome to Library App " + UserSession.currentUser!.login + "!";
+            }
+            else
+            {
+                txbUserMenu.Text = UserSession.currentUser!.name;
+            }
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs f)
