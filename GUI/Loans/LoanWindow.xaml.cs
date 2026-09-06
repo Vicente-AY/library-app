@@ -184,6 +184,11 @@ namespace library_app.GUI.Loans
 
         }
 
+        private void BtnItemDetails_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void LoadSumary()
         {
 
